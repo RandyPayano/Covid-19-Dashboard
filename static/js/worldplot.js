@@ -8,21 +8,21 @@ Plotly.d3.csv('images/covid16_table.csv', function(err, rows){
         type: 'choropleth',
         locationmode: 'country names',
         locations: unpack(rows, 'Country'),
-        z: unpack(rows, 'NewDeaths'),
-        autocolorscale: true,
+        z: unpack(rows, 'Pct Recovered Cases'),
+        autocolorscale: false,
         reversescale: true,
         colorscale: 'Portland', 
         transforms: [{
           type: 'aggregate',
           groups: unpack(rows, 'Country'),
           aggregations: [
-            {target: 'z', func: 'avg', enabled: true},
+            {target: 'z', func: 'first', enabled: true},
         ]
     }]
    }];
 
     var layout = {
-      title: '<b>World c',
+      title: 'Recovery Rate (%)',
       geo: {
           showframe: false,
           showcoastlines: false,
@@ -38,11 +38,7 @@ Plotly.d3.csv('images/covid16_table.csv', function(err, rows){
         yanchor: 'top',
         active: 0,
         showactive: false,
-        buttons: [{
-            method: 'restyle',
-            args: ['transforms[0].aggregations[0].func', 'last'],
-            label: 'Last'
-        }]
+        buttons: []
   }]
     };
 

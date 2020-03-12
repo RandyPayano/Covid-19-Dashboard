@@ -17,17 +17,27 @@ app = Flask(__name__, static_url_path='')
 
 
 def listof_countries():
-    url= 'https://www.worldometers.info/coronavirus/'
-  
+    url= 'https://www.worldometers.info/coronavirus/' 
     covid16_table = pd.read_html(url)
     covid16_table = covid16_table[0].fillna('0')
     covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'Critical'},inplace = True) 
     covid16_table.NewCases = covid16_table.NewCases.apply(lambda x: x.replace('+',''))
-    covid16_table
-    return list(covid16_table['Country'])
+    lat_long = pd.read_csv('static/images/latandlong.csv')
+    pop = pd.read_csv('static/images/pop.csv')
+    latlongpop = lat_long.merge(pop, on="Country")
+    final_table = latlongpop.merge(covid16_table, on="Country")
+    final_table['TotalRecovered'] = pd.to_numeric(final_table['TotalRecovered'])
+
+
+
+    final_table['Pct Affected of Pop'] = final_table['TotalCases'] / final_table['Population 2018'] * 100
+    final_table['Pct Recovered Cases'] = final_table['TotalRecovered'] / final_table['TotalCases'] * 100
+    final_table = final_table.round(5)
+    final_table.to_csv("static/images/covid16_table.csv")
+    return list(final_table['Country'])
 
 def dict_list():
-    info_mongodbpairs = pd.read_csv('covid16_table.csv')
+    info_mongodbpairs = pd.read_csv('static/images/covid16_table.csv')
     info_mongodbpairs = info_mongodbpairs.iloc[:,1:]
     list_of_dicts = []
     info_mongodbpairs = info_mongodbpairs.transpose() 
