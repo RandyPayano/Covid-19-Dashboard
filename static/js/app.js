@@ -2,17 +2,10 @@
 apiKey = "n8ytM4yxbemwLYG_yrRa";
 
 /**
- * Helper function to select stock data
- * Returns an array of values
  * @param {array} rows
  * @param {integer} index
- * index 0 - Date
- * index 1 - Open
- * index 2 - High
- * index 3 - Low
- * index 4 - Close
- * index 5 - Volume
  */
+
 function unpack(rows, index) {
   return rows.map(function(row) {
     return row[index];
@@ -21,19 +14,16 @@ function unpack(rows, index) {
 
 function getMonthlyData(sample) {
 
-  var queryUrl = `https://www.quandl.com/api/v3/datasets/EOD/${sample}?start_date=2018-01-01&end_date=2020-01-01&collapse=monthly&api_key=n8ytM4yxbemwLYG_yrRa`;
+  var queryUrl = `https://www.quandl.com/api/v3/datasets/EOD/GOOGL?start_date=2018-01-01&end_date=2020-01-01&collapse=monthly&api_key=n8ytM4yxbemwLYG_yrRa`;
   d3.json(queryUrl).then(function(data) {
     var dates = unpack(data.dataset.data, 0);
     var openPrices = unpack(data.dataset.data, 1);
-    var highPrices = unpack(data.dataset.data, 2);
-    var lowPrices = unpack(data.dataset.data, 3);
-    var closingPrices = unpack(data.dataset.data, 4);
-    var volume = unpack(data.dataset.data, 5);
-    buildTable(dates, openPrices, highPrices, lowPrices, closingPrices, volume);
+  
+    buildTable(dates, openPrices);
   });
 }
 
-function buildTable(dates, openPrices, highPrices, lowPrices, closingPrices, volume) {
+function buildTable(dates, openPrices) {
   var table = d3.select("#summary-table");
 
   var tbody = table.select("tbody");
@@ -45,10 +35,7 @@ function buildTable(dates, openPrices, highPrices, lowPrices, closingPrices, vol
     trow = tbody.append("tr");
     trow.append("td").text(dates[i]);
     trow.append("td").text(openPrices[i]);
-    trow.append("td").text(highPrices[i]);
-    trow.append("td").text(lowPrices[i]);
-    trow.append("td").text(closingPrices[i]);
-    trow.append("td").text(volume[i]);
+    
   }
 }
 

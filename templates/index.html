@@ -95,18 +95,38 @@
 }
 
 /* Create three equal columns that floats next to each other */
-.rscolumn {
+.rslcolumn {
   float: left;
-  width: 27.33%;
-  padding: 5px;
+  width: 20.33%;
+  padding: 3px;
+  
+  height: 700px;
+  border-radius: 5%;
+  display: inline-block;
  
 }
 
+.rsrcolumn {
+  float: left;
+  width: 20.33%;
+  padding: 3px;
+  overflow-wrap: break-word;
+ height: 700px;
+ border-radius: 4%;
+ display: inline-block;
+}
 
 .rscolumnmid {
   float: left;
-  width: 40.33%;
-  padding: 5px;
+  width: 50.33%;
+  padding: 3px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 700px;
+  border-radius: 5%;
+  display: inline-block;
+  overflow-wrap: break-word;
+  
 
 }
 
@@ -114,7 +134,9 @@
 .rsrow:after {
   content: "";
   display: table;
+  display: inline-block;
   clear: both;
+  border-radius: 4%;
 }
 </style>
     </style>
@@ -132,7 +154,12 @@
 
 
 
-      
+      <div class="bs-component">
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+
           <div class="bs-component">
             <div class="progress">
               <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
@@ -145,79 +172,15 @@
           <div class="row">
             <div class="col-lg-12">
               
-              <div class="bs-component">
-                <div class="jumbotron">
-                  <hr class="my-4">
+           
 
-
-
-                  <div class="randy">
-                      <h4 id="containers"><center><br>Strategizing with Machine Learning: Pairs Trading Arbitrage</h4></center>
-                   <h5 class="display-3"></h5>
-                   <p class="lead"></p>
-                   
-
-
-<div class="rsrow">
-  <div class="rscolumn" style="background-color:#aaa;">
-    <h2>Column 1</h2>
-    <p>rsSome text..</p>
-
-
-   Country: 
-      
-
-
-
-
-
-
-
-  </div>
-  <div class="rscolumnmid" style="background-color:#bbb;">
-    
-   
-    <div id="graph"></div>
+ 
                 
-  </div>
-  <div class="rscolumn" style="background-color:#ccc;">
-    <select id="selDataset" onchange="refresh_data(this.value)"></select>
-       
-    <h2>right</h2>
-    
-  <div id="sample-metadata">
-
-  </div>
-</div>
-
-                 </div>
-                 <br>
-                 <center> <a class="btn btn-primary btn-sm" href="https://en.wikipedia.org/wiki/Pairs_trade" role="button">Learn more</a></center>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bs-component">
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-12">
-              
-              <div class="bs-component">
-                <div class="jumbotron">
                 
+
+            
                  
-                  <hr class="my-4">
-
-
-
-                  <div class="randy">
-                  
-                   <h5 class="display-3"></h5>
-                   <p class="lead">
+               
                      
 
 
@@ -225,18 +188,7 @@
 
    <!-- Headings -->
 
-   <div class="row">
-
  
-    
-          <h4>DBSCAN Clustering</h4><br>
-        <div class="bs-component">
-            <img src="images/4.jpg"alt="Trulli" width="330" height="190">
-          
-
-            <br>
-            <p class="lead"><br>●	Utilized unsupervised algorithm DBSCAN to find clusters of similar equities. <br> ●	Applied T-SNE cluster visualization algorithm to re-enforced trust in DBSCAN’s final clusters.<br> ● To confirm validation of our clustering we visualize all clusters. </p>
-         
     </div>
 
       </div>
@@ -250,17 +202,7 @@
     </div>
       </div>
     
-      <div class="col-lg-4">
-          <h4>Cointegrated Pairs
-             </h4><br>
-        <div class="bs-component">
-            <img src="images/1.jpg"alt="Trulli" width="330" height="190">
           
-            
-            <br>
-            <p class="lead"><br>● With the help of our clusters, we can run a pair validation function with a 0.03 significance. <br> ●	Our function narrowed down 8,203,275 possible pairs to 47 co-integrated pairs, with 57 unique equities.  <br> ●Finally, T-SNE is utilized to visualize our final list of pairs and their relationships. </p>
-         </div>
-
       </div>
     </div>
           
@@ -278,7 +220,7 @@
 
                  </div>
                  <br>
-                 <center> <a class="btn btn-primary btn-sm" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">NoteBook</a></center>
+                 <center> <a class="btn btn-primary btn-sm" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">Recovery Rate Percentage</a></center>
                 </div>
               </div>
             </div>
@@ -289,8 +231,25 @@
 
 
 
+          <script>
+            d3.text("images/covid16_table.csv", function(data) {
+                var parsedCSV = d3.csv.parseRows(data);
 
+                var container = d3.select("heretable")
+                    .append("table")
 
+                    .selectAll("tr")
+                        .data(parsedCSV).enter()
+                        .append("tr")
+
+                    .selectAll("td")
+                        .data(function(d) { return d; }).enter()
+                        .append("td")
+                        .text(function(d) { return d; });
+            });
+        </script>
+
+          <div class="heretable"></div>
 
 
           
@@ -311,16 +270,51 @@
 
  <!-- Containers
       ================================================== -->
-      <div class="bs-docs-section">
-
+  
         <div class="row">
           <div class="col-lg-12">
             
             <div class="bs-component">
               <div class="jumbotron">
-                <p class="lead"><center> Confirm Pairs by visualizing  their Correlation.</center></p>
-                <p class="lead"></p>
-                <hr class="my-4">
+                            
+
+
+<div class="rsrow">
+
+ 
+  <div class="rslcolumn" style="background-color:#fff;">
+   
+    <h5>Select Country:</h5>
+
+    <select id="selDataset" onchange="refresh_data(this.value)"></select>
+       
+  <div id="sample-metadata"></div>
+
+
+  </div>
+
+  <div class="rscolumnmid" style="background-color:#fff;">
+
+    <br>
+    <br>
+    <br>
+    <div id="graph"></div>
+  </div>
+
+
+  <div class="rsrcolumn" style="background-color:#fff;">
+
+    <center>
+     <h4>New Developments </h4>
+     {% block content %}
+     <h1>{{name}}</h1>
+     {{data | safe}}
+     {% endblock %}
+    </center>
+     
+</div>
+
+</div>
 
       
                     
@@ -450,7 +444,12 @@
 
 
 
-   
+   <div>
+
+
+
+
+   </div>
   </script>
       <footer id="footer">
       

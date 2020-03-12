@@ -2768,12 +2768,14 @@ fieldset:disabled a.btn {
 .btn-primary {
   color: #fff;
   background-color: #1a1a1a;
+  border-radius: 5%;
   border-color: #1a1a1a;
 }
 
 .btn-primary:hover {
   color: #fff;
   background-color: #070707;
+  border-radius: 5%;
   border-color: #010000;
 }
 
@@ -2781,6 +2783,7 @@ fieldset:disabled a.btn {
   color: #fff;
   background-color: #070707;
   border-color: #010000;
+  border-radius: 5%;
   -webkit-box-shadow: 0 0 0 0.2rem rgba(60, 60, 60, 0.5);
           box-shadow: 0 0 0 0.2rem rgba(60, 60, 60, 0.5);
 }
@@ -2795,6 +2798,7 @@ fieldset:disabled a.btn {
 .show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #010000;
+  border-radius: 5%;
   border-color: black;
 }
 
@@ -3382,7 +3386,8 @@ fieldset:disabled a.btn {
   padding: 0.5rem 1rem;
   font-size: 0.765625rem;
   line-height: 1.5;
-  border-radius: 0;
+  border-radius: 5%;
+
 }
 
 .btn-block {

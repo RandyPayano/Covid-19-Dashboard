@@ -28,7 +28,7 @@ def listof_countries():
     final_table = latlongpop.merge(covid16_table, on="Country")
     final_table['TotalRecovered'] = pd.to_numeric(final_table['TotalRecovered'])
 
-
+    final_table['NewCases'] = final_table['NewCases'].apply(pd.to_numeric, errors='coerce')
 
     final_table['Pct Affected of Pop'] = final_table['TotalCases'] / final_table['Population 2018'] * 100
     final_table['Pct Recovered Cases'] = final_table['TotalRecovered'] / final_table['TotalCases'] * 100
@@ -48,9 +48,14 @@ def dict_list():
 
 @app.route("/")
 def home_page():
-        
-   
-    return render_template("index.html")
+    allmydata = pd.read_csv('static/images/covid16_table.csv')    
+    allmydata = allmydata
+
+    top_newcases = pd.read_csv('static/images/covid16_table.csv')
+    top_newcases = top_newcases.set_index("Country")
+    top_newcases = top_newcases.sort_values(by=['NewCases'], ascending=False)
+    top_newcases = top_newcases[['NewCases','NewDeaths']].head(15)
+    return render_template("index.html", data = top_newcases.to_html())
 
 
 @app.route('/names')
