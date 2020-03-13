@@ -8,7 +8,7 @@ Plotly.d3.csv('images/covid16_table.csv', function(err, rows){
         type: 'choropleth',
         locationmode: 'country names',
         locations: unpack(rows, 'Country'),
-        z: unpack(rows, 'Pct Recovered Cases'),
+        z: unpack(rows, 'NewDeaths'),
         autocolorscale: false,
         reversescale: true,
         colorscale: 'Portland', 

@@ -83,13 +83,53 @@
 
 
 
-
-
-
-
-  <style>
- 
 <style>
+*
+.svg {
+  background: #0aa7ce;
+}
+
+.land {
+  fill: #ccc;
+  stroke: #333;
+  stroke-width: 0.5;
+}
+
+.boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.circle {
+  stroke: #000;
+  stroke-width: 0.5;
+  opacity: 0.7;
+}
+
+div.tooltip {
+  position: absolute;
+  text-align: center;
+  max-width: 220px;
+  height: auto;
+  padding: 5px;
+  font-family: "Lato", sans-serif;
+  font-size: 10px;
+  background: #3d3d3d;
+  color: white;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+</style>
+
+
+<style>
+
+
+
 * {
   box-sizing: border-box;
 }
@@ -100,19 +140,35 @@
   width: 20.33%;
   padding: 3px;
   
-  height: 700px;
-  border-radius: 5%;
+  height: 600px;
+  border-radius: 4%;
+  overflow-y:auto;
+
   display: inline-block;
  
 }
+
+.smalltableblock {
+  float: left;
+  width: 100px;
+  padding: 3px;
+  
+  height: 50px;
+  border-radius: 4%;
+
+  display: inline-block;
+ 
+}
+
 
 .rsrcolumn {
   float: left;
   width: 20.33%;
   padding: 3px;
   overflow-wrap: break-word;
- height: 700px;
+ height: 600px;
  border-radius: 4%;
+ overflow-y:auto;
  display: inline-block;
 }
 
@@ -138,6 +194,17 @@
   clear: both;
   border-radius: 4%;
 }
+
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+
+
 </style>
     </style>
     
@@ -146,6 +213,7 @@
   <body>
   
 
+    
 
       <!-- Navbar
       ================================================== -->
@@ -179,8 +247,8 @@
                 
 
             
-                 
-               
+             
+    
                      
 
 
@@ -206,11 +274,7 @@
       </div>
     </div>
           
-           
-
-
-
-
+          
 
 
 
@@ -220,7 +284,17 @@
 
                  </div>
                  <br>
-                 <center> <a class="btn btn-primary btn-sm" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">Recovery Rate Percentage</a></center>
+                 <center> <a class="btn btn-primary btn-md" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                  <div class="smalltableblock "> 
+                    
+                  <center>
+                   
+                    {% block contentt %}
+                    <h1>{{name}}</h1>
+                   <center> {{totalcases | safe}} </center>
+                    {% endblock %}
+                   </center>
+                </div></a></center>
                 </div>
               </div>
             </div>
@@ -228,29 +302,26 @@
      
       
 
+          <br>
+          <center> <a class="btn btn-primary btn-md" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+           <div class="smalltableblock "> 
+             
+           <center>
+            
+             {% block contenttttt %}
+             <h1>{{name}}</h1>
+            <center> {{newcases | safe}} </center>
+             {% endblock %}
+            </center>
+         </div></a></center>
+         </div>
+       </div>
+     </div>
+   </div>
 
 
 
-          <script>
-            d3.text("images/covid16_table.csv", function(data) {
-                var parsedCSV = d3.csv.parseRows(data);
-
-                var container = d3.select("heretable")
-                    .append("table")
-
-                    .selectAll("tr")
-                        .data(parsedCSV).enter()
-                        .append("tr")
-
-                    .selectAll("td")
-                        .data(function(d) { return d; }).enter()
-                        .append("td")
-                        .text(function(d) { return d; });
-            });
-        </script>
-
-          <div class="heretable"></div>
-
+         
 
           
           <div class="bs-component">
@@ -308,7 +379,7 @@
      <h4>New Developments </h4>
      {% block content %}
      <h1>{{name}}</h1>
-     {{data | safe}}
+     {{sorted_newcases | safe}}
      {% endblock %}
     </center>
      
@@ -391,45 +462,7 @@
                 <hr class="my-4">
 
 
-
-                <div class="randy">
-                    <h4 id="containers"><center><br>Company Profile</h4></center>
-              
-           
-                  </div>
-                  <div id="corrplot"></div>
-                </div>
-              </div>
-            
-          
-              <div class="row">
-                <div class="col-md-12">
-                  <table id="summary-table" class="table table-striped table-inverse">
-                    <thead>
-                      <tr>
-                        <th>Date</th>
-                        <th>Open</th>
-                        <th>High</th>
-                        <th>Low</th>
-                        <th>Close</th>
-                        <th>Volume</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-               </div>
-               <br>
-              
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div id="plot"></div>
+        <div id="plottt"></div>
 
 
       <!-- Progress
@@ -451,6 +484,8 @@
 
    </div>
   </script>
+
+
       <footer id="footer">
       
   <center>© 2020
@@ -468,6 +503,7 @@
     </div>
 
 
+    <div class="bodytwo"></div>
 
 
     <script src="../_vendor/jquery/dist/jquery.min.js"></script>
@@ -479,5 +515,6 @@
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
   <script src="{{ url_for('static', filename='js/worldplot.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/worldmap.js') }}"></script>
   </body>
 </html>

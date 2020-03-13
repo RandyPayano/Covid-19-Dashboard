@@ -5,7 +5,7 @@ Angola,AGO,30809762
 Albania,ALB,2866376
 Andorra,AND,77006
 Arab World,ARB,419790588
-United Arab Emirates,ARE,9630959
+UAE,ARE,9630959
 Argentina,ARG,44494502
 Armenia,ARM,2951776
 American Samoa,ASM,55465
@@ -51,7 +51,7 @@ Cuba,CUB,11338138
 Curacao,CUW,159849
 Cayman Islands,CYM,64174
 Cyprus,CYP,1189265
-Czech Republic,CZE,10625695
+Czechia,CZE,10625695
 Germany,DEU,82927922
 Djibouti,DJI,958920
 Dominica,DMA,71625
@@ -78,7 +78,7 @@ France,FRA,66987244
 Faroe Islands,FRO,48497
 "Micronesia, Fed. Sts.",FSM,112640
 Gabon,GAB,2119275
-United Kingdom,GBR,66488991
+UK,GBR,66488991
 Georgia,GEO,3731000
 Ghana,GHA,29767108
 Gibraltar,GIB,33718
@@ -93,7 +93,7 @@ Guatemala,GTM,17247807
 Guam,GUM,165768
 Guyana,GUY,779004
 High income,HIC,1210312147
-"Hong Kong SAR, China",HKG,7451000
+Hong Kong,HKG,7451000
 Honduras,HND,9587522
 Heavily indebted poor countries (HIPC),HPC,780234406
 Croatia,HRV,4089400
@@ -109,7 +109,7 @@ Isle of Man,IMN,84077
 India,IND,1352617328
 Not classified,INX,
 Ireland,IRL,4853506
-"Iran, Islamic Rep.",IRN,81800269
+Iran,IRN,81800269
 Iraq,IRQ,38433600
 Iceland,ISL,353574
 Israel,ISR,8883800
@@ -123,7 +123,7 @@ Kyrgyz Republic,KGZ,6315800
 Cambodia,KHM,16249798
 Kiribati,KIR,115847
 St. Kitts and Nevis,KNA,52441
-"Korea, Rep.",KOR,51635256
+South Korea,KOR,51635256
 Kuwait,KWT,4137309
 Latin America & Caribbean (excluding high income),LAC,609013934
 Lao PDR,LAO,7061507
@@ -248,7 +248,7 @@ Uganda,UGA,42723139
 Ukraine,UKR,44622516
 Upper middle income,UMC,2655635719
 Uruguay,URY,3449299
-United States,USA,327167434
+USA,USA,327167434
 Uzbekistan,UZB,32955400
 St. Vincent and the Grenadines,VCT,110210
 "Venezuela, RB",VEN,28870195

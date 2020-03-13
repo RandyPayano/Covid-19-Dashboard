@@ -10,30 +10,40 @@ from flask_pymongo import PyMongo
 from bson.json_util import dumps
 import bson.json_util as json_util
 import quandl
-
+import requests
 
 
 app = Flask(__name__, static_url_path='')
 
+header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
+
+r = requests.get('https://www.worldometers.info/coronavirus/', headers=header)
+dfs = pd.read_html(r.text)
+covid16_table= dfs[0]
+covid16_table = covid16_table.fillna('0')
+covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'Critical'},inplace = True) 
+#covid16_table.NewCases = covid16_table.NewCases.apply(lambda x: x.replace('+',''))
+final_table = covid16_table
+final_table.iloc[:,2:].apply(pd.to_numeric, errors='coerce')
+final_table= final_table.fillna('0')
+final_table = final_table.sort_values(by=['NewCases'], ascending=False)
+final_table.to_csv('static/images/covid16_table.csv')
 
 def listof_countries():
-    url= 'https://www.worldometers.info/coronavirus/' 
-    covid16_table = pd.read_html(url)
-    covid16_table = covid16_table[0].fillna('0')
+
+   
+    header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
+
+    r = requests.get('https://www.worldometers.info/coronavirus/', headers=header)
+    dfs = pd.read_html(r.text)
+    covid16_table= dfs[0]
+    covid16_table = covid16_table.fillna('0')
     covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'Critical'},inplace = True) 
     covid16_table.NewCases = covid16_table.NewCases.apply(lambda x: x.replace('+',''))
-    lat_long = pd.read_csv('static/images/latandlong.csv')
-    pop = pd.read_csv('static/images/pop.csv')
-    latlongpop = lat_long.merge(pop, on="Country")
-    final_table = latlongpop.merge(covid16_table, on="Country")
-    final_table['TotalRecovered'] = pd.to_numeric(final_table['TotalRecovered'])
+    final_table = covid16_table
+    final_table.iloc[:,2:].apply(pd.to_numeric, errors='coerce')
+    final_table= final_table.fillna('0')
 
-    final_table['NewCases'] = final_table['NewCases'].apply(pd.to_numeric, errors='coerce')
-
-    final_table['Pct Affected of Pop'] = final_table['TotalCases'] / final_table['Population 2018'] * 100
-    final_table['Pct Recovered Cases'] = final_table['TotalRecovered'] / final_table['TotalCases'] * 100
-    final_table = final_table.round(5)
-    final_table.to_csv("static/images/covid16_table.csv")
     return list(final_table['Country'])
 
 def dict_list():
@@ -48,43 +58,67 @@ def dict_list():
 
 @app.route("/")
 def home_page():
-    allmydata = pd.read_csv('static/images/covid16_table.csv')    
-    allmydata = allmydata
+    # GET SORTED NEW CASES AND DEATHS
 
-    top_newcases = pd.read_csv('static/images/covid16_table.csv')
-    top_newcases = top_newcases.set_index("Country")
-    top_newcases = top_newcases.sort_values(by=['NewCases'], ascending=False)
-    top_newcases = top_newcases[['NewCases','NewDeaths']].head(15)
-    return render_template("index.html", data = top_newcases.to_html())
+    header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
+    scrape_r = requests.get('https://www.worldometers.info/coronavirus/', headers=header)
+    covid16_table = pd.read_html(scrape_r.text)
+    covid16_table= covid16_table[0]
+    covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'Critical'},inplace = True) 
+    startswithlist = []
+
+    for i in covid16_table.NewCases:
+        if str(i).startswith('+'):
+            startswithlist.append(i[1:])
+        else:
+            startswithlist.append(i)
+
+    covid16_table['sortingnewcases'] = startswithlist        
+    covid16_table['sortingnewcases'] = covid16_table['sortingnewcases'].str.replace(',', '')
+    covid16_table['sortingnewcases'] = covid16_table['sortingnewcases'].apply(pd.to_numeric)
+    sorted_newcases = covid16_table[covid16_table['sortingnewcases'] > 0 ].sort_values(by=['sortingnewcases'], ascending=False)
+    sorted_newcases = sorted_newcases.set_index('Country')
+    sorted_newcases = sorted_newcases[['NewCases', 'NewDeaths']].fillna(0)
+
+
+    info_mongodbpairs = pd.read_csv('static/images/covid16_table.csv')
+    summarycases =  info_mongodbpairs.iloc[:1,2:6] 
+
+    #TotalCases
+    totalcases = summarycases.iloc[:,:1]
+    totalcases = totalcases.set_index('TotalCases')
+    #NewCases
+    newcases = summarycases.iloc[:,1:2]
+    newcases = newcases.set_index('NewCases')
+    #TotalDeaths
+    totaldeaths = summarycases.iloc[:,2:3]
+    totaldeaths = totaldeaths.set_index('TotalDeaths')
+    #NewDeaths
+    newdeaths = summarycases.iloc[:,3:4]
+    newdeaths = newdeaths.set_index('NewDeaths')
+
+    return render_template("index.html", sorted_newcases = sorted_newcases.to_html(), totalcases = totalcases.to_html(), summary = summarycases.to_html(),newcases=newcases.to_html() )
 
 
 @app.route('/names')
 def namess():
 
    
-   
-    return jsonify(listof_countries())
+    list_countries = pd.read_csv('static/images/covid16_table.csv')
+    
+    return jsonify(list(list_countries['Country']))
 
 
 
  # Return MetaData for specific sample
 @app.route("/metadata/<sample>")
-def sample_metadata(sample):
+def sample_metadata(sample = "China"):
     
     for dicte in dict_list():
         if dicte['Country'] == sample:
             dataDict = dicte
         
     return jsonify(dataDict)
-
-
-
-
-
-
-
-
-
 
 
 
