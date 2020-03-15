@@ -39,15 +39,35 @@ final_table['Population'] = final_table['Population'] * 1000
 final_table['PopulationAffected'] = final_table['TotalCases'] / final_table['Population'] *100
 final_table['Cases Recovered'] =  final_table['TotalRecovered'] / final_table['TotalCases'] * 100
 final_table['Cases Active'] =  final_table['ActiveCases'] / final_table['TotalCases'] * 100
-
 final_table['Mortality Rate'] =  final_table['TotalDeaths'] / final_table['TotalCases'] * 100
+
+print(final_table)
+
+
+
+
 
 
 final_table.to_csv('static/images/covid16_table.csv')
+
+
+sorted_totals = final_table.sort_values(by=['TotalCases'], ascending=False)
+sorted_totals  = sorted_totals.iloc[1:].fillna(0)
+sorted_totals  =sorted_totals[['Country','TotalCases','TotalDeaths','ActiveCases']]
+sorted_totals  = sorted_totals.rename(columns={"TotalCases": "Cases","TotalDeaths": "Deaths", "ActiveCases": "Active"})
+sorted_totals = sorted_totals.set_index('Country')
+
+print(sorted_totals)
 sorted_popaffectcsv = final_table.sort_values(by=['PopulationAffected'], ascending=False)
-sorted_popaffectcsv = sorted_popaffectcsv.iloc[:25,:]
+sorted_popaffectcsv = sorted_popaffectcsv.iloc[:15,:]
 sorted_popaffectcsv.to_csv('static/images/sorted_popaffectcsv.csv')
-print(sorted_popaffectcsv)
+
+sorted_mortalityratecsv = final_table.sort_values(by=['Mortality Rate'], ascending=False)
+sorted_mortalityratecsv = sorted_mortalityratecsv[sorted_mortalityratecsv["TotalCases"] > 20]
+sorted_mortalityratecsv = sorted_mortalityratecsv.iloc[:30,:]
+sorted_mortalityratecsv = sorted_mortalityratecsv.rename(columns={"Mortality Rate": "MortalityRate"})
+sorted_mortalityratecsv.to_csv('static/images/sorted_mortalityratecsv.csv')
+
 
 def do_lat_long():
     lat_long = pd.read_csv('static/images/covid16_table.csv')
@@ -73,12 +93,14 @@ def do_lat_long():
         if e >= 2000 and e < 3000:    
             graphing_value.append(800)
         if e >= 3000 and e < 4000:    
-            graphing_value.append(1000)    
+            graphing_value.append(950)    
         if e >= 4000 and e < 8000:    
-            graphing_value.append(1200)
+            graphing_value.append(1150)
         if e >= 8000 and e < 22000:    
-            graphing_value.append(1500)
-        if e >= 22000:    
+            graphing_value.append(1300)
+        if e >= 22000 and e < 35000:    
+            graphing_value.append(2000)    
+        if e >= 35000:    
             graphing_value.append(3000)   
         
     lat_long['graphing_value'] = graphing_value
@@ -175,7 +197,7 @@ def home_page():
    
 
   
-    return render_template("index.html", sorted_newcases = sorted_newcases.to_html(), totalcases = totalcases.to_html(), newdeaths = newdeaths.to_html(),newcases=newcases.to_html(), totaldeaths=totaldeaths.to_html(), totalrecovered = totalrecovered.to_html(), activecases = activecases.to_html(), popaffected = popaffected.to_html(), pctrecovered = pctrecovered.to_html(), pctactive = pctactive.to_html(), mortalityrate = mortalityrate.to_html())
+    return render_template("index.html", sorted_totals =sorted_totals.to_html(), sorted_newcases = sorted_newcases.to_html(), totalcases = totalcases.to_html(), newdeaths = newdeaths.to_html(),newcases=newcases.to_html(), totaldeaths=totaldeaths.to_html(), totalrecovered = totalrecovered.to_html(), activecases = activecases.to_html(), popaffected = popaffected.to_html(), pctrecovered = pctrecovered.to_html(), pctactive = pctactive.to_html(), mortalityrate = mortalityrate.to_html())
 
 
 @app.route('/names')

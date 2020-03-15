@@ -27,7 +27,7 @@
             "translate(" + margin.left + "," + margin.top + ")");
   
   // Parse the Data
-  d3.csv("images/sorted_popaffectcsv.csv", function(data) {
+  d3.csv("images/sorted_mortalityratecsv.csv", function(data) {
   
   // X axis
   var x = d3.scaleBand()
@@ -43,7 +43,7 @@
   
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0,0.3])
+    .domain([0, d3.max(data, function(d) { return d.MortalityRate; })])
     .range([ height, 0]);
   svg.append("g")
     .call(d3.axisLeft(y));
@@ -64,8 +64,8 @@
   svg.selectAll("rect")
     .transition()
     .duration(800)
-    .attr("y", function(d) { return y(d.PopulationAffected); })
-    .attr("height", function(d) { return height - y(d.PopulationAffected); })
+    .attr("y", function(d) { return y(d.MortalityRate); })
+    .attr("height", function(d) { return height - y(d.MortalityRate); })
     .delay(function(d,i){console.log(i) ; return(i*100)})
   
   })

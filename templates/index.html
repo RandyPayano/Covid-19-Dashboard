@@ -26,12 +26,12 @@
 /* Create three equal columns that floats next to each other */
 .rslcolumn {
   float: left;
-  width: 20.33%;
+  width: 18.33%;
+  margin-left: 1%;
   padding: 3px;
-  height: 600px;
+  height: 1000px;
   border-radius: 4%;
 
-  overflow-y:auto;
 }
 
 .smalltableblock {
@@ -48,18 +48,44 @@
   width: 20.33%;
   padding: 3px;
   overflow-wrap: break-word;
- height: 300px;
- border-radius: 4%;
+ height: 1222px;
+
+
+
+}
+
+
+.rsrcolumnsmall1 {
+  float:left;
+  width: 100%;
+
+ overflow-wrap: break-word;
+ height: 400px;
+
  overflow-y:auto;
 
 }
 
+.rsrcolumnsmall2 {
+  float:left;
+  width: 100%;
+  padding: 3px;
+  overflow-wrap: break-word;
+ height: 400px;
+ border-radius: 4%;
+ overflow-y:auto;
+ background: black;
+
+}
+
+
+
 .rscolumnmid {
   float: left;
-  width: 52.33%;
+  width: 54.33%;
   padding: 3px;
-  margin-left: 45px;
-  margin-right: 45px;
+  margin-left: 35px;
+  margin-right: 35px;
   height:555px;
   border-radius: 5%;
   overflow-wrap: break-word;
@@ -432,11 +458,26 @@ table {
   
        
 
-<div class="rsrow">
-
  
   <div class="rslcolumn">
+
+    <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">  <center>
+      <h5>Total</h5>
+      {% block contenta %}
+      <h1>{{name}}</h1>
+      {{sorted_totals| safe}}
+      {% endblock %}
+     </center>
+    </div>
    
+    <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">
+    <center>  <h5>&nbsp;</h5>    </center>
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+    <center>  <h5>Population Affected (%) </h5>    </center>
+
+
     <h5>Select Country:</h5>
 
     <select id="selDataset" onchange="refresh_data(this.value)"></select>
@@ -444,6 +485,8 @@ table {
   <div id="sample-metadata"></div>
 
 
+</div>
+ 
   </div>
 
   <div class="rscolumnmid">
@@ -452,7 +495,7 @@ table {
     <div>
     
       <div id="my_dataviz"></div>
-       <svg id="my_dataviz" width="900" height="600"></svg>
+       <svg id="my_dataviz" width="1000" height="600"></svg>
 
       
     
@@ -563,15 +606,36 @@ var Tooltip = d3.select("#my_dataviz")
 
 
   <div class="rsrcolumn" style="background-color:#fff;">
+    
 
-    <center>
-     <h4>New Developments </h4>
-     {% block content %}
-     <h1>{{name}}</h1>
-     {{sorted_newcases | safe}}
-     {% endblock %}
-    </center>
-     
+
+    <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">  <center>
+      <h5>New </h5>
+      {% block content %}
+      <h1>{{name}}</h1>
+      {{sorted_newcases | safe}}
+      {% endblock %}
+     </center>
+    </div>
+   <br>
+
+
+
+  <center>  <h5>&nbsp;</h5>    </center>
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+  </div>
+  <center>  <h5>Population Affected (%) </h5>    </center>
+  <center> <div id="svg2"></div> </center>
+</div>
+    
+    <div class="rsrcolumnsmall1" style="background-color:#fff;"></div>
+
+          
+</div>
+
+    
+
 </div>
 
 </div>
@@ -591,51 +655,17 @@ var Tooltip = d3.select("#my_dataviz")
       
       </div>
       <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-            
-     <div> hahahahahah ahahah <br> hahahaha
-    
-      
-    </div> 
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 
 
 
-
-<div id="svg2"></div> 
 
 <script>
 
 
   // set the dimensions and margins of the graph
   var margin = {top: 10, right: 30, bottom: 90, left: 40},
-      width = 460 - margin.left - margin.right,
-      height = 450 - margin.top - margin.bottom;
+      width = 350 - margin.left - margin.right,
+      height = 350 - margin.top - margin.bottom;
   
   // append the svg object to the body of the page
   var svg2 = d3.select("#svg2")
@@ -663,7 +693,7 @@ var Tooltip = d3.select("#my_dataviz")
   
   // Add Y axis
   var y = d3.scaleLinear()
-    .domain([0,0.3])
+    .domain([0,d3.max(data, function(d) { return d.PopulationAffected; })])
     .range([ height, 0]);
   svg2.append("g")
     .call(d3.axisLeft(y));
@@ -691,6 +721,29 @@ var Tooltip = d3.select("#my_dataviz")
   })
   
   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       <footer id="footer">
