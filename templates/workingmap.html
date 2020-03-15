@@ -1,52 +1,471 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>COVID-19 Visualization by Randy Payano</title>
+  <link rel="stylesheet" href="bootstrap.min.css" media="screen">
+  <link rel="stylesheet" href="bootstrap.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
-    <!-- Load d3.js and the geo projection plugin -->
-    <script src="https://d3js.org/d3.v4.js"></script>
-    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
+  <script src="https://d3js.org/d3.v4.js"></script>
+  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
     
-    <!-- Create an element where the map will take place -->
-    <div id="my_dataviz"></div>
-    
-    <style>
-    .circle:hover{
-      stroke: black;
-      stroke-width: 1px;
-    }
+
+
+<style>
 
 
 
-   div.tooltip {
-  position: absolute;
+/* Create three equal columns that floats next to each other */
+.rslcolumn {
+  float: left;
+  width: 20.33%;
+  padding: 3px;
+  height: 600px;
+  border-radius: 4%;
+
+  overflow-y:auto;
+}
+
+.smalltableblock {
+  float: left;
+  width: 100px;
+  padding: 3px;
+  height: 50px;
+  border-radius: 4%;
+}
+
+
+.rsrcolumn {
+  float:left;
+  width: 20.33%;
+  padding: 3px;
+  overflow-wrap: break-word;
+ height: 600px;
+ border-radius: 4%;
+ overflow-y:auto;
+
+}
+
+.rscolumnmid {
+  float: left;
+  width: 52.33%;
+  padding: 3px;
+  margin-left: 45px;
+  margin-right: 45px;
+  height:555px;
+  border-radius: 5%;
+  overflow-wrap: break-word;
+  
+
+}
+
+
+.rsrow:after {
+  content: "";
+  display: table;
+  display: inline-block;
+  clear: both;
+  border-radius: 4%;
+}
+
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #fff;
   text-align: center;
-  max-width: 220px;
-  height: auto;
-  padding: 2px;
-  font-family: "Lato", sans-serif;
-  font-size: 10px;
-  border: 0px;
-  border-radius: 1px;
-  pointer-events: none;
 }
 
 
 
+.middleee {
+  width: 100%;
+  height: 200px;
+  background-color:rgb(255, 0, 0);
+}
+
+.fullc{
+  width: 100%;
+  height: 80px;
+  background-color:rgb(255, 255, 255);
+}
 
 
+.smallleft {
+ 	  margin-left: 1%;
+	  width: 10%;
+    float: left;
+    height: 100%;
+    border-radius: 9%;
+  
+    background-color:rgb(255, 255, 255);
+    overflow-wrap: break-word;
+ }
+ 
+.smalllmid {
+	width: 10%;
+	float:left;
+  height: 100%;
+  background-color:rgb(255, 255, 255);
+  margin-left: 2%;
+  border-radius: 5%;
+  display: inline-block;
+  overflow-wrap: break-word;
+ } 
+ 
+ .smallright{
+	margin-left: 2%;
+	width: 10%;
+  float: right;
+  height: 100%;
+  background-color:rgb(255, 255, 255);
+  border-radius: 4%;
+  overflow-wrap: break-word;
+  border-radius: 4%;
+ 
+ }
+ 
+ .smallright2{
+	  margin-left: 2%;
+	  width: 10%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 4%;
+    overflow-wrap: break-word;
+    float: left;
+  	overflow-wrap: break-word;
+   	border-radius: 4%;
+ }
+
+ .smallright3{
+    margin-left: 2%;
+	  width: 10%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 4%;
+    overflow-wrap: break-word;
+    float: left;
+  	overflow-wrap: break-word;
+   	border-radius: 4%;
+ }
+
+
+ .smallright4{
+    margin-left: 2%;
+	  width: 10%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 4%;
+    overflow-wrap: break-word;
+    float: left;
+  	overflow-wrap: break-word;
+   	border-radius: 4%;
+ }
+
+
+ .smallright5{
+    margin-left: 2%;
+	  width: 10%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 4%;
+    overflow-wrap: break-word;
+    float: left;
+  	overflow-wrap: break-word;
+   	border-radius: 4%;
+ }
+
+
+
+
+.smallright6{
+    margin-left: 2%;
+	  width: 10%;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    border-radius: 4%;
+    overflow-wrap: break-word;
+    float: left;
+  	overflow-wrap: break-word;
+   	border-radius: 4%;
+}
+
+  .circle:hover{
+        stroke: black;
+        stroke-width: 1px;
+      }
+  
+  
+  
+  div.tooltip {
+    position: absolute;
+    text-align: center;
+    max-width: 220px;
+    height: auto;
+    padding: 2px;
+    font-family: "Lato", sans-serif;
+    font-size: 10px;
+    border: 0px;
+    border-radius: 1px;
+    pointer-events: none;
+  }
+  
     </style>
-
-
-<html>
+  
 
 
 
-<!-- Create an element where the map will take place -->
-<body>
-<svg id="my_dataviz" width="888" height="800"></svg>
+</head>
 
-<script>
 
+
+
+
+
+    <body>
+
+     
+
+      <!-- Navbar
+      ================================================== -->
+    
+  
+
+
+
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+     
+
+       
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+         
+   
+
+ 
+                
+
+              <div class="fullc">
+
+
+
+
+                <div class="smallright3">
+                  <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+           
+             
+                    <center>
+                     
+                      {% block contentttttttttttt %}
+                      <h1>{{name}}</h1>
+                     <center> {{popaffected| safe}} </center>
+                      {% endblock %}
+                     </center>
+                  </a></center>
+                
+                  </div> 
+
+
+
+
+                  <div class="smalllmid">
+
+     
+                    <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+             
+               
+                      <center>
+                       
+                        {% block contentt%}
+                        <h1>{{name}}</h1>
+                       <center> {{totalcases | safe}} </center>
+                        {% endblock %}
+                       </center>
+                    </a></center>
+                  
+                
+                  </div>
+                  
+
+
+
+
+
+                  <div class="smallright2">
+                    <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+             
+               
+                      <center>
+                       
+                        {% block contentttttttttt %}
+                        <h1>{{name}}</h1>
+                       <center> {{totaldeaths | safe}} </center>
+                        {% endblock %}
+                       </center>
+                    </a></center>
+                  
+                    </div> 
+
+
+
+  
+                <div class="smallleft">
+                  <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+           
+             
+                    <center>
+                     
+                      {% block contenttttt %}
+                      <h1>{{name}}</h1>
+                     <center> {{newcases | safe}} </center>
+                      {% endblock %}
+                     </center>
+                  </a></center>
+                  </div>
+                        
+             
+             
+
+      
+                    <div class="smallright">
+                      <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+               
+                 
+                        <center>
+                         
+                          {% block contenttt %}
+                          <h1>{{name}}</h1>
+                         <center> {{newdeaths | safe}} </center>
+                          {% endblock %}
+                         </center>
+                      </a></center>
+                    
+                      </div> 
+                
+                      <div class="smallright4">
+                        <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                 
+                   
+                          <center>
+                           
+                            {% block contentttttt %}
+                            <h1>{{name}}</h1>
+                           <center> {{pctrecovered | safe}} </center>
+                            {% endblock %}
+                           </center>
+                        </a></center>
+                      
+                        </div> 
+                    
+
+                        <div class="smallright5">
+                          <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                   
+                     
+                            <center>
+                             
+                              {% block contenttttttttttttttt %}
+                              <h1>{{name}}</h1>
+                             <center> {{pctactive | safe}} </center>
+                              {% endblock %}
+                             </center>
+                          </a></center>
+                        
+                          </div> 
+                      
+                  
+                          <div class="smallright6">
+                            <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                     
+                       
+                              <center>
+                               
+                                {% block contentttttttttttttt %}
+                                <h1>{{name}}</h1>
+                               <center> {{mortalityrate | safe}} </center>
+                                {% endblock %}
+                               </center>
+                            </a></center>
+                          
+                            </div> 
+                  </div>          
+             
+    
+                    
+              
+                  
+                  </div>   
+  
+                    
+                    </div>          
+               
+      
+
+
+
+      
+  
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+ <!-- Containers
+      ================================================== -->
+  
+       
+
+<div class="rsrow">
+
+ 
+  <div class="rslcolumn">
+   
+    <h5>Select Country:</h5>
+
+    <select id="selDataset" onchange="refresh_data(this.value)"></select>
+       
+  <div id="sample-metadata"></div>
+
+
+  </div>
+
+  <div class="rscolumnmid">
+
+
+    <div>
+    
+      <div id="my_dataviz"></div>
+       <svg id="my_dataviz" width="900" height="600"></svg>
+
+      
+    
+
+      </div>
+
+      
+      <script>
+ 
     // The svg
     var svg = d3.select("svg"),
         width = +svg.attr("width"),
@@ -64,7 +483,11 @@
 
 
 
+    d3.json("/latandlong", function(obj){
 
+      var obj = obj
+      
+      console.log(obj);
     // Load external data and boot
     d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
     
@@ -114,12 +537,6 @@ var Tooltip = d3.select("#my_dataviz")
 
 
 
-
-
-    d3.json("/latandlong", function(obj){
-
-    console.log(obj);
-    var obj = obj
     // Add circles:
     svg
       .selectAll("myCircles")
@@ -142,7 +559,82 @@ var Tooltip = d3.select("#my_dataviz")
 })
 })
 
+          </script>
 
-    </script>
-</body>
+
+
+  </div>
+
+
+  <div class="rsrcolumn" style="background-color:#fff;">
+
+    <center>
+     <h4>New Developments </h4>
+     {% block content %}
+     <h1>{{name}}</h1>
+     {{sorted_newcases | safe}}
+     {% endblock %}
+    </center>
+     
+</div>
+
+</div>
+
+      
+
+
+     
+            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+ <!-- Containers
+      ================================================== -->
+     
+            
+       
+
+
+
+
+
+
+
+
+
+      <footer id="footer">
+      
+        
+
+
+
+  <center>© 2020
+    Randy Payano</center> 
+        </div>
+
+      </footer>
+
+
+    </div>
+    <div class="bs-component">
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+    </div>
+
+
+
+    <script src="../_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="../_vendor/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../_assets/js/custom.js"></script>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+  </body>
 </html>
+
+
+
+

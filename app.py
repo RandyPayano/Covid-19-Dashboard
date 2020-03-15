@@ -21,15 +21,18 @@ dfs = pd.read_html(r.text)
 covid16_table= dfs[0]
 covid16_table = covid16_table.fillna('0')
 covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'Critical'},inplace = True) 
-#covid16_table.NewCases = covid16_table.NewCases.apply(lambda x: x.replace('+',''))
+covid16_table = covid16_table.apply(lambda x: x.replace(',',''))
 final_table = covid16_table
-final_table.iloc[:,2:].apply(pd.to_numeric, errors='coerce')
+
+final_table.iloc[:,2:] = final_table.iloc[:,2:].apply(pd.to_numeric, errors='coerce')
+
 #final_table= final_table.fillna('0')
 final_table['NewCases']= final_table['NewCases'].apply(pd.to_numeric, errors='coerce')
 
-final_table = final_table.sort_values(by=['NewCases'])
 final_table = final_table.merge(population_latlong, on='Country')
 final_table = final_table.drop(columns='Unnamed: 0')
+
+
 final_table['TotalRecovered'] = final_table['TotalRecovered'].apply(pd.to_numeric, errors='coerce')
 final_table['TotalDeaths'] = final_table['TotalDeaths'].apply(pd.to_numeric, errors='coerce')
 final_table['Population'] = final_table['Population'] * 1000
@@ -38,12 +41,17 @@ final_table['Cases Recovered'] =  final_table['TotalRecovered'] / final_table['T
 final_table['Cases Active'] =  final_table['ActiveCases'] / final_table['TotalCases'] * 100
 
 final_table['Mortality Rate'] =  final_table['TotalDeaths'] / final_table['TotalCases'] * 100
+
+
 final_table.to_csv('static/images/covid16_table.csv')
-
-
+sorted_popaffectcsv = final_table.sort_values(by=['PopulationAffected'], ascending=False)
+sorted_popaffectcsv = sorted_popaffectcsv.iloc[:25,:]
+sorted_popaffectcsv.to_csv('static/images/sorted_popaffectcsv.csv')
+print(sorted_popaffectcsv)
 
 def do_lat_long():
     lat_long = pd.read_csv('static/images/covid16_table.csv')
+    lat_long.iloc[:,2:] = lat_long.iloc[:,2:]
     lat_long['TotalCases'] = lat_long['TotalCases'].apply(pd.to_numeric, errors='coerce')
     lat_long = lat_long.iloc[:-1,:]
     graphing_value = []
@@ -101,40 +109,47 @@ def home_page():
     # GET SORTED NEW CASES AND DEATHS
 
     header = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36","X-Requested-With": "XMLHttpRequest"}
-    scrape_r = requests.get('https://www.worldometers.info/coronavirus/', headers=header)
-    covid16_table = pd.read_html(scrape_r.text)
-    covid16_table= covid16_table[0]
+    r = requests.get('https://www.worldometers.info/coronavirus/', headers=header)
+    dfs = pd.read_html(r.text)
+    covid16_table= dfs[0]
+    covid16_table = covid16_table.fillna('0')
     covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'Critical'},inplace = True) 
+    final_table = covid16_table
     startswithlist = []
-
+ 
     for i in covid16_table.NewCases:
         if str(i).startswith('+'):
-            startswithlist.append(i[1:])
+            startswithlist.append(i.replace(',',''))
         else:
-            startswithlist.append(i)
+            startswithlist.append(i.replace(',',''))
 
-    covid16_table['sortingnewcases'] = startswithlist        
-    covid16_table['sortingnewcases'] = covid16_table['sortingnewcases']
+    covid16_table['sortingnewcases'] = startswithlist
     covid16_table['sortingnewcases'] = covid16_table['sortingnewcases'].apply(pd.to_numeric)
-  
     sorted_newcases = covid16_table[covid16_table['sortingnewcases'] > 0 ]
-    print(sorted_newcases)
+    sorted_newcases = sorted_newcases.sort_values(by=['sortingnewcases'], ascending=False)
+
     sorted_newcases = sorted_newcases.set_index('Country')
     sorted_newcases = sorted_newcases[['NewCases', 'NewDeaths']].fillna(0)
-    sorted_newcases = sorted_newcases.iloc[1:,:]
+    sorted_newcases = sorted_newcases.iloc[:,:]
 
     final_table = pd.read_csv('static/images/covid16_table.csv')
     final_table = final_table.iloc[:,1:]
-    print(final_table)
+    
+
+    
     #TotalCases
     totalcases = final_table.iloc[-1:,1:2]
-    totalcases = totalcases.set_index('TotalCases')
+    totalcases = totalcases.rename(columns={"TotalCases": "Confirmed Cases"})
+    totalcases = totalcases.set_index('Confirmed Cases')
+    
     #NewCases
     newcases =  final_table.iloc[-1:,2:3]
-    newcases = newcases.set_index('NewCases')
+    newcases = newcases.rename(columns={"NewCases": "New Cases"})
+    newcases = newcases.set_index('New Cases')
     #TotalDeaths
     totaldeaths = final_table.iloc[-1:,3:4]
-    totaldeaths = totaldeaths.set_index('TotalDeaths')
+    totaldeaths = totaldeaths.rename(columns={"TotalDeaths": "Total Deaths"})
+    totaldeaths = totaldeaths.set_index('Total Deaths')
     #NewDeaths
     newdeaths = final_table.iloc[-1:,4:5]
     newdeaths = newdeaths.set_index('NewDeaths')
@@ -146,7 +161,8 @@ def home_page():
     activecases = activecases.set_index('ActiveCases')
     #Pop % Affected
     popaffected = final_table.iloc[-1:,12:13].round(4).astype(str) + '%'
-    popaffected  = popaffected.set_index("PopulationAffected")
+    popaffected = popaffected.rename(columns={"PopulationAffected": "Population Affected"})
+    popaffected  = popaffected.set_index("Population Affected")
     #Percentage Recovered
     pctrecovered = final_table.iloc[-1:,13:14].round(2).astype(str) + '%'
     pctrecovered = pctrecovered.set_index('Cases Recovered')
