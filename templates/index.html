@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>COVID-19 Visualization by Randy Payano</title>
+  <title>Coronavirus (COVID-19 Visualization by Randy Payano</title>
   <link rel="stylesheet" href="bootstrap.min.css" media="screen">
   <link rel="stylesheet" href="bootstrap.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
@@ -16,7 +16,8 @@
   <script src="https://d3js.org/d3.v4.js"></script>
   <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
-    
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 
 
 <style>
@@ -46,7 +47,7 @@
 .rsrcolumn {
   float:left;
   width: 20.33%;
-  padding: 3px;
+
   overflow-wrap: break-word;
  height: 1222px;
 
@@ -59,8 +60,7 @@
   float:left;
   width: 100%;
 
- overflow-wrap: break-word;
- height: 400px;
+ height: 480px;
 
  overflow-y:auto;
 
@@ -82,11 +82,28 @@
 
 .rscolumnmid {
   float: left;
-  width: 54.33%;
+  width: 53.33%;
   padding: 3px;
   margin-left: 35px;
   margin-right: 35px;
-  height:555px;
+  
+  height: 2000px;
+  border-radius: 5%;
+  overflow-wrap: break-word;
+  
+
+}
+
+
+.rscolumnmidrow2 {
+  float: left;
+  width: 100%;
+  padding: 1px;
+  margin-left: 4px;
+  margin-right: 4px;
+
+  background-color:rgb(248, 6, 119);
+  
   border-radius: 5%;
   overflow-wrap: break-word;
   
@@ -242,8 +259,186 @@ table {
     pointer-events: none;
   }
   
+
+
+
+
+
+path.line {
+  fill: none;
+  stroke:rgb(34, 113, 187);
+  stroke-width: 3px;
+}
+
+.axis path,
+.axis line {
+fill: none;
+stroke: slategray;
+shape-rendering: crispEdges;
+}
+
+
+
+.column11 {
+  float: left;
+  width: 40%;
+  padding: 5px;
+
+  
+  height: 100%;
+  overflow-wrap: break-word;
+   overflow:hidden;
+}
+.column22 {
+  float: left;
+  width: 55%;
+  padding: 5px;
+  height: 555px;
+ 
+}
+/* Clearfix (clear floats) */
+.row12::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+
     </style>
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    .containment {
+      float: left;
+      width: 380px;
+      height: 380px;
+      padding: 5px;
+
+    }
+    
+    
+    
+    .newsbox {
+      float: left;
+      width: 100%;
+      height: 30%;
+      padding: 5px;
+     
+    }
+    
+    
+    
+    .newsheaderrow {
+      float: left;
+      width: 100%;
+      height: 25%;
+      padding: 3px;
+     
+   
+    }
+
+    .newsheaderrowdiv1 {
+      float: left;
+      width: 55%;
+      height: 70%;
+      padding: 1px;
+      overflow-wrap: break-word;
+      overflow:hidden;
+   
+    }
+    
+    
+    .newsheaderrowdiv2 {
+      float: right;
+      width: 45%;
+      height: 100%;
+      padding: 1px;
+      overflow-wrap: break-word;
+      overflow:hidden;
+   
+
+    }
+    
+    
+    
+    .newscontent {
+      float: left;
+      width: 100%;
+      height: 80%;
+      padding: 5px;
+  
+    }
+    
+    
+    .newstitles {
+      float: left;
+      width: 70%;
+      height: 98%;
+      padding: 2px;
+     
+    }
+    
+    
+    
+    .newspic {
+      float: right;
+      width: 28%;
+      height: 100%;
+      padding: 2px;
+     
+    }
+    
+    
+    
+    .tableaudiv{
+      float: left;
+      width: 500;
+      height: 500;
+      padding: 2px;
+      overflow-wrap: break-word;
+      overflow:hidden;
+     
+    }
+    
+    
+    
+    </style>
+
+
+
+
+
+
+
+
+
 
 
 
@@ -266,16 +461,13 @@ table {
 
 
         <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar" role="progressbar" style="width: 100%; height:100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
      
 
        
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
          
-   
+       <center><h4>Global Coronavirus (COVID-19) Overview </h4></center> 
 
  
                 
@@ -437,10 +629,10 @@ table {
 
 
 
-      
+      <br>
   
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" style="width: 100%; height:45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
 
@@ -459,10 +651,10 @@ table {
        
 
  
-  <div class="rslcolumn">
+  <div class="rsrcolumn">
 
     <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">  <center>
-      <h5>Total</h5>
+      <h5>Total Cases</h5>
       {% block contenta %}
       <h1>{{name}}</h1>
       {{sorted_totals| safe}}
@@ -470,22 +662,44 @@ table {
      </center>
     </div>
    
-    <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">
-    <center>  <h5>&nbsp;</h5>    </center>
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-    <center>  <h5>Population Affected (%) </h5>    </center>
+
+    <div class="rsrcolumnsmall1">
+      
+
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+     
+      <br>
+      <center>  <h6>Mortality Rate by Country (%)</h6>    </center>
 
 
-    <h5>Select Country:</h5>
 
-    <select id="selDataset" onchange="refresh_data(this.value)"></select>
-       
-  <div id="sample-metadata"></div>
+
+
+
+
+
+
+
+
+
+                  <div id="svg3"></div>
+
+    
+
+
+
+
 
 
 </div>
+
+
+
+
+
+
  
   </div>
 
@@ -497,7 +711,111 @@ table {
       <div id="my_dataviz"></div>
        <svg id="my_dataviz" width="1000" height="600"></svg>
 
+
+
+
+       <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+     
+
+
+
+
+        <div id="rscolumnmidrow2">
+
       
+          <div class="row12">
+            <div class="column11">
+           
+         
+        
+        
+        
+        
+           
+          <div id="sample-metadata" style= "margin-left:5%"></div>
+        
+            </div>
+            <div class="column22">
+
+             <h5> Case Progression by Country</h5>
+              
+              <br> <select id="selectButton"></select>
+
+              <select id="selDataset" onchange="refresh_data(this.value)"></select>
+               
+              
+              <div id="svg4" float="left"><!-- Initialize a select button -->
+               
+
+
+                </div>
+            </div>
+          
+            </div>
+          </div>
+
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          
+        
+
+
+
+          <div id="rscolumnmidrow2">
+            <div id="rscolumnmidrow2">
+              <br> <center>  <h5>Hubei Province Case Study:</h5></center> <br>
+              This visualization is a case study of 44,672 confirmed COVID-19 cases of the Hubei Province in China, broken down by health conditions and varying ages of the patients. The visualization is meant to inform people of the associations between age, health conditions and the coronavirus for the specified sample in the study and is not meant to be interpreted as definitive facts for all populations. The data was extracted from China’s Infectious Disease Information System. 
+              
+         
+ <br>
+ <center>
+ <a class="btn btn-primary btn-sm" href="http://weekly.chinacdc.cn/en/article/id/e53946e2-c6c4-41e9-9a9b-fea8db1a8f51" role="button">Learn More</a>
+            </div> 
+          </center>
+              <div class="column11">
+             
+           
+           
+
+                <center>
+
+<h6> By Health Conditions</h6>
+<div id="svg6" float="left"></div>
+                </center>
+
+            
+              </div>
+              <div class="column22">
+  
+                <center>
+                  <h6> By Age Groups</h6>
+                <div id="svg5" float="right"><!-- Initialize a select button -->
+                  </center>
+ 
+  
+  
+                  </div>
+              </div>
+        
+              </div>
+            
+            </div>
+  
+
+      
+
+
+
+
+  </div>
+      
+        
+       
+      </center>
     
 
       </div>
@@ -549,7 +867,7 @@ table {
 
 // create a tooltip 
 var Tooltip = d3.select("#my_dataviz")
-      .append("div")
+.append("div")
       .attr("class", "tooltip")
       .style("opacity", 1)
       .style("background-color", "white")
@@ -557,7 +875,8 @@ var Tooltip = d3.select("#my_dataviz")
       .style("border-width", "2px")
       .style("border-radius", "5px")
       .style("padding", "5px")
-
+    
+  
     // Three function that change the tooltip when user hover / move / leave a cell
     var mouseover = function(d) {
       Tooltip.style("opacity", 1)
@@ -565,9 +884,9 @@ var Tooltip = d3.select("#my_dataviz")
 
 
     var mousemove = function(d) {
-      Tooltip.html(d.Country + "<br>" + "Total Cases: " + d.TotalCases + "<br>" + "Active Cases: "+  d.ActiveCases   + "<br>" + "long: " + d.long + "<br>" + "lat: " + d.lat)
-        .style("left", (d3.mouse(this)[0]+10) + "px")
-        .style("top", (d3.mouse(this)[1]) + "px")
+      Tooltip.html(d.Country + "<br>" + "Total Cases: " + d.TotalCases + "<br>" + "Active Cases: "+  d.ActiveCases + "<br>" + "Total Deaths: "+  d.TotalDeaths)
+        .style("left", (d3.mouse(this)[0]+300) + "px")
+        .style("top", (d3.mouse(this)[1]+55) + "px")
     }
     var mouseleave = function(d) {
       Tooltip.style("opacity", 5)
@@ -605,36 +924,272 @@ var Tooltip = d3.select("#my_dataviz")
   </div>
 
 
-  <div class="rsrcolumn" style="background-color:#fff;">
+  <div class="rsrcolumn">
     
 
 
     <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">  <center>
-      <h5>New </h5>
+      <h5>New Cases </h5>
       {% block content %}
       <h1>{{name}}</h1>
       {{sorted_newcases | safe}}
       {% endblock %}
      </center>
     </div>
-   <br>
+
+                                          <div class="rsrcolumnsmall1">
+                                            
+
+
+                                            <div class="progress">
+                                              <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                              </div>
+                                              <br>
+                                            <center>  <h6>Population Affected by Country (%)</h6>    </center>
 
 
 
+
+
+
+
+
+                                            <center> <div id="svg2"></div> </center> 
+
+                                          
+                                          
+                                          </div>
+
+
+     
   <center>  <h5>&nbsp;</h5>    </center>
   <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
   </div>
-  <center>  <h5>Population Affected (%) </h5>    </center>
-  <center> <div id="svg2"></div> </center>
-</div>
-    
-    <div class="rsrcolumnsmall1" style="background-color:#fff;"></div>
 
+
+
+
+
+
+
+
+  <div class="containment">
+  
+  <center> <h5> Latest News</h5></center>
+    <div class="newsbox">
+
+
+  
+
+          <div class="newsheaderrow">
+
+            
+
+            <div class="newsheaderrowdiv1">
+            <h6>  {{ dictionary1.articlesource}}</h6>
+          </div>
+            
+           
+             <div class="newsheaderrowdiv2">
+
+            {{ dictionary1.articlewhen}}
+          </div>
+
+
+
+
+
+          </div>
+
+
+    <div class="newscontent">
+
+    <div class="newstitles">
+      
+      {{ dictionary1.title}}
+          </div>
+
+<div class="newspic">
+  <img src="{{ dictionary1.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
+          </div>
+    
+
+
+          </div>
+  
+    </div>
+
+
+<br>
+
+
+
+    <div class="newsbox">
+
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+
+
+      <div class="newsheaderrow">
+        <div class="newsheaderrowdiv1">
+        <h6>{{ dictionary2.articlesource}}</h6>
+        </div>
           
+         
+           <div class="newsheaderrowdiv2">
+
+          {{ dictionary2.articlewhen}}
+        </div>
+
+      </div>
+
+
+<div class="newscontent">
+
+<div class="newstitles">
+  {{ dictionary2.title}}
+
+      </div>
+
+<div class="newspic">
+  <img src="{{ dictionary2.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
+
+      </div>
+
+
+
+      </div>
+
 </div>
 
+
+<br>
+
+<div class="newsbox">
+
+
+  <div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+
+  <div class="newsheaderrow">
+
+    <div class="newsheaderrowdiv1">
+     <h6> {{ dictionary3.articlesource}}</h6>
+    </div>
+      
+     
+       <div class="newsheaderrowdiv2">
+
+      {{ dictionary3.articlewhen}}
+    </div>
+
+  </div>
+
+
+<div class="newscontent">
+
+<div class="newstitles">
+  {{ dictionary3.title}}
+
+  </div>
+
+<div class="newspic">
+  <img src="{{ dictionary3.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
+
+  </div>
+
+
+
+  </div>
+
+</div>
+
+
+
+
+<div class="newsbox">
+
+
+  
+
+  <div class="newsheaderrow">
+
+    <div class="progress">
+      <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+  
+
+    <div class="newsheaderrowdiv1">
+    <h6>  {{ dictionary4.articlesource}}</h6>
+  </div>
     
+   
+     <div class="newsheaderrowdiv2">
+
+    {{ dictionary4.articlewhen}}
+  </div>
+
+
+
+  </div>
+
+
+<div class="newscontent">
+
+  <br>
+
+
+<div class="newstitles">
+
+{{ dictionary4.title}}
+  </div>
+
+<div class="newspic">
+<img src="{{ dictionary4.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
+  </div>
+
+
+
+  </div>
+
+</div>
+
+
+<br>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+    
+
+</div>
+
+</div>   
 
 </div>
 
@@ -658,14 +1213,12 @@ var Tooltip = d3.select("#my_dataviz")
 
 
 
-
 <script>
 
-
   // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 90, left: 40},
-      width = 350 - margin.left - margin.right,
-      height = 350 - margin.top - margin.bottom;
+  var margin = {top: 10, right: 30, bottom: 100, left: 90},
+      width = 380 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
   
   // append the svg object to the body of the page
   var svg2 = d3.select("#svg2")
@@ -692,8 +1245,8 @@ var Tooltip = d3.select("#my_dataviz")
       .style("text-anchor", "end");
   
   // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0,d3.max(data, function(d) { return d.PopulationAffected; })])
+  var y =d3.scaleSqrt()
+    .domain([d3.min(data, function(d) { return d.PopulationAffected; }),d3.max(data, function(d) { return d.PopulationAffected; })])
     .range([ height, 0]);
   svg2.append("g")
     .call(d3.axisLeft(y));
@@ -705,7 +1258,9 @@ var Tooltip = d3.select("#my_dataviz")
     .append("rect")
       .attr("x", function(d) { return x(d.Country); })
       .attr("width", x.bandwidth())
-      .attr("fill", "#69b3a2")
+      .attr("fill", "#778899")
+      .attr("fill-opacity", .8)
+      .attr("stroke", "#69b3a2")
       // no bar at the beginning thus:
       .attr("height", function(d) { return height - y(0); }) // always equal to 0
       .attr("y", function(d) { return y(0); })
@@ -726,6 +1281,381 @@ var Tooltip = d3.select("#my_dataviz")
 
 
 
+<br>
+
+
+
+
+
+
+
+<div>
+
+
+
+
+
+
+
+
+
+<script>
+
+
+ 
+// set the dimensions and margins of the graph
+  // set the dimensions and margins of the graph
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 30, bottom: 100, left: 30},
+      width = 380 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+  
+  
+  // append the svg object to the body of the page
+  var svg3 = d3.select("#svg3")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+  
+  // Parse the Data
+  d3.csv("images/sorted_mortalityratecsv.csv", function(data) {
+  
+  // X axis
+  var x = d3.scaleBand()
+    .range([ 0, width ])
+    .domain(data.map(function(d) { return d.Country; }))
+    .padding(0.2);
+  svg3.append("g")
+    .attr("transform", "translate(0," + height + ")")
+    .call(d3.axisBottom(x))
+    .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-60)")
+      .style("text-anchor", "end");
+  
+  // Add Y axis
+  var y = d3.scaleLinear()
+    .domain([0, 15])
+    .range([ height, 0]);
+    
+
+        
+  svg3.append("g")
+    .call(d3.axisLeft(y));
+  
+
+
+
+    
+  // Bars
+  svg3.selectAll("mybarr")
+    .data(data)
+    .enter()
+    .append("rect")
+      .attr("x", function(d) { return x(d.Country); })
+      .attr("width", x.bandwidth())
+      .attr("fill", "#778899")
+      .attr("fill-opacity", .8)
+      .attr("stroke", "#69b3a2")
+      // no bar at the beginning thus:
+      .attr("height", function(d) { return height - y(0); }) // always equal to 0
+      .attr("y", function(d) { return y(0); })
+  
+  // Animation
+  svg3.selectAll("rect")
+    .transition()
+    .duration(800)
+    .attr("y", function(d) { return y(d.MortalityRate); })
+    .attr("height", function(d) { return height - y(d.MortalityRate); })
+    .delay(function(d,i){console.log(i) ; return(i*100)})
+
+  })
+
+  
+
+
+
+  </script>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Create a div where the graph will take place -->
+
+
+<!-- Color Scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+
+
+
+<script>
+
+
+// set the dimensions and margins of the graph
+  // set the dimensions and margins of the graph
+  var margin = {top: 15, right: 30, bottom: 5, left: 30},
+      width = 480 - margin.left - margin.right,
+      height = 570  - margin.top - margin.bottom;
+  
+  
+  // append the svg object to the body of the page
+  var svg4 = d3.select("#svg4")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+  
+  //Read the data
+  d3.csv("images/AAconfirmed.csv",
+
+
+  // Now I can use this dataset:
+  function(d){
+    var changecountry = d3.select("#selectButton").property("value") 
+
+    return { time : d3.timeParse("%Y-%m-%d")(d.time), value : d.value, 
+China : d.China,
+Italy : d.Italy,
+Spain : d.Spain,
+Germany : d.Germany,
+Iran : d.Iran,
+USA : d.USA,
+France : d.France,
+['S. Korea'] : d['.S. Korea'],
+Switzerland : d.Switzerland,
+UK : d.UK,
+Netherlands : d.Netherlands,
+Austria : d.Austria,
+Belgium : d.Belgium,
+Norway : d.Norway,
+Sweden : d.Sweden,
+Denmark : d.Denmark,
+Malaysia : d.Malaysia,
+Portugal : d.Portugal,
+Japan : d.Japan,
+Canada : d.Canada,
+Australia : d.Australia,
+Czechia : d.Czechia,
+Brazil : d.Brazil,
+Israel : d.Israel,
+Ireland : d.Ireland,
+Pakistan : d.Pakistan,
+Greece : d.Greece,
+Luxembourg : d.Luxembourg,
+Qatar : d.Qatar,
+Finland : d.Finland,
+Chile : d.Chile,
+Poland : d.Poland,
+Iceland : d.Iceland,
+Singapore : d.Singapore,
+Indonesia : d.Indonesia,
+Ecuador : d.Ecuador,
+Turkey : d.Turkey,
+['Saudi Arabia'] : d['Saudi Arabia'],
+Slovenia : d.Slovenia,
+Thailand : d.Thailand,
+Romania : d.Romania,
+Bahrain : d.Bahrain,
+Egypt : d.Egypt,
+Estonia : d.Estonia,
+['Hong Kong'] : d['Hong Kong'],
+Russia : d.Russia,
+India : d.India,
+Peru : d.Peru,
+Philippines : d.Philippines,
+Iraq : d.Iraq,
+['South Africa'] : d['South Africa'],
+Lebanon : d.Lebanon,
+Mexico : d.Mexico,
+Kuwait : d.Kuwait,
+Colombia : d.Colombia,
+['San Marino'] : d['San Marino'],
+UAE : d.UAE,
+Panama : d.Panama,
+Slovakia : d.Slovakia,
+Armenia : d.Armenia,
+Taiwan : d.Taiwan,
+Serbia : d.Serbia,
+Bulgaria : d.Bulgaria,
+Argentina : d.Argentina,
+Croatia : d.Croatia,
+Latvia : d.Latvia,
+Uruguay : d.Uruguay,
+Vietnam : d.Vietnam,
+Algeria : d.Algeria,
+['Costa Rica'] : d['Costa Rica'],
+Hungary : d.Hungary,
+Jordan : d.Jordan,
+['Bosnia and Herzegovina'] : d['Bosnia and Herzegovina'],
+['Faeroe Islands'] : d['Faeroe Islands'],
+Brunei : d.Brunei,
+Morocco : d.Morocco,
+Andorra : d.Andorra,
+Cyprus : d.Cyprus,
+['Sri Lanka'] : d['Sri Lanka'],
+['Dominican Republic'] : d['Dominican Republic'],
+Albania : d.Albania,
+['North Macedonia'] : d['North Macedonia'],
+Belarus : d.Belarus,
+Moldova : d.Moldova,
+Malta : d.Malta,
+Lithuania : d.Lithuania,
+Tunisia : d.Tunisia,
+Kazakhstan : d.Kazakhstan, Cambodia : d.Cambodia, Oman : d.Oman, Palestine : d.Palestine, Guadeloupe : d.Guadeloupe, Azerbaijan : d.Azerbaijan, Georgia : d.Georgia, Venezuela : d.Venezuela, ['Burkina Faso'] : d['Burkina Faso'], ['New Zealand'] : d['New Zealand'], Senegal : d.Senegal, Martinique : d.Martinique, Ukraine : d.Ukraine, Liechtenstein : d.Liechtenstein, ['Réunion'] : d['Réunion'], Afghanistan : d.Afghanistan, Honduras : d.Honduras, Bangladesh : d.Bangladesh, Cameroon : d.Cameroon, DRC : d.DRC, Macao : d.Macao, Rwanda : d.Rwanda, Cuba : d.Cuba, Jamaica : d.Jamaica, Bolivia : d.Bolivia, Ghana : d.Ghana, Guyana : d.Guyana, ['French Guiana'] : d['French Guiana'], ['Puerto Rico'] : d['Puerto Rico'], Maldives : d.Maldives, Paraguay : d.Paraguay, Guatemala : d.Guatemala, Nigeria : d.Nigeria, ['Channel Islands'] : d['Channel Islands'], Monaco : d.Monaco,
+['French Polynesia'] : d['French Polynesia'], Gibraltar : d.Gibraltar, ['Ivory Coast'] : d['Ivory Coast'], Ethiopia : d.Ethiopia, Togo : d.Togo, ['Trinidad and Tobago'] : d['Trinidad and Tobago'], Kenya : d.Kenya,
+Mongolia : d.Mongolia, Aruba : d.Aruba, ['Saint Martin'] : d['Saint Martin'], Suriname : d.Suriname, ['Cayman Islands'] : d['Cayman Islands'], ['Curaçao'] : d['Curaçao'], Gabon : d.Gabon,
+Namibia : d.Namibia, ['St. Barth'] : d['St. Barth'], ['U.S. Virgin Islands'] : d['U.S. Virgin Islands'], Sudan : d.Sudan, Bhutan : d.Bhutan, Guinea : d.Guinea, Mauritania : d.Mauritania, ['Saint Lucia'] : d['Saint Lucia'], Nepal : d.Nepal, ['Antigua and Barbuda'] : d['Antigua and Barbuda'], ['St. Vincent Grenadines'] : d['St. Vincent Grenadines'], Eswatini : d.Eswatini, ['Total:'] : d['Total:'],
+}
+  }, 
+
+  function(data) {
+    console.log(data)
+  
+      // List of groups (here I have one group per column)
+      var allGroup = ["Select Country"]
+  
+      // add the options to the button
+      d3.select("#selectButton")
+        .selectAll('myOptions')
+         .data(allGroup)
+        .enter()
+        .append('option')
+        .text(function (d) { return d; }) // text showed in the menu
+        .attr("value", function (d) { return d; }) // corresponding value returned by the button
+  
+      // A color scale: one color for each group
+      var myColor = d3.scaleOrdinal()
+        .domain(allGroup)
+        .range(d3.schemeSet3);
+    
+      // Add X axis --> it is a date format
+      var x = d3.scaleTime()
+        .domain(d3.extent(data, function(d) { return d.time; }))
+        .range([ 0, width ]);
+      svg4.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .selectAll("text")
+      .attr("transform", "translate(-10,15)rotate(-60)");
+  
+      //                                      Y axis
+      var y = d3.scaleSqrt()
+        .domain([0, 100])
+        .range([height, 0 ]);
+        svg4.append("g")
+        .call(d3.axisLeft(y));
+        
+      // Initialize line with group a
+      var line = svg4
+        .append('g')
+        .append("path")
+          .datum(data)
+          .attr("stroke-width", 1.5)
+          .attr("d", d3.line()
+            .x(function(d) { return x(+d.time) })
+            .y(function(d) { return y(+d.value)})
+          )
+          .attr("stroke", "#69b3a2")
+        .style("stroke-width", 3)
+        .style("fill", "none")
+      
+
+
+
+
+
+
+      // A function that update the chart
+      function update() {
+        d3.csv("images/AAconfirmed.csv",
+        function(d){
+          var changecountry = d3.select("#selectButton").property("value") 
+          return { time : d3.timeParse("%Y-%m-%d")(d.time),valueA: d.valueA ,valueB : d.valueB,valueC : d.valueC }
+        })
+
+     
+        var changecountry= d3.select("#selDataset").property("value") 
+        // Create new data with the selection?
+        var dataFilter = data.map(function(d){return  {time: d.time, value: d[changecountry]} })
+        console.log("updated")
+   
+
+
+
+
+        // Update X axis
+  
+           // Give these new data to update line
+           line
+            .datum(dataFilter)
+            .transition()
+            .duration(1000)
+            .attr("d", d3.line().x(function(d) { return x(+d.time)}).y(function(d) { return y(+d.value / 1000)}))
+            .attr("stroke", "#69b3a2")
+            
+
+
+            y.d3.scaleSqrt().domain([0, 100])  // change scale to 0, to between 10 and 100
+            svg4.selectAll("g.y.yaxis")
+                         .text("Rescaled Axis")
+                    .transition().duration(1500).ease("sin-in-out")  // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
+                    .call(yAxis);  
+
+       
+          
+      }
+  
+
+
+
+      // When the button is changed, run the updateChart function
+      d3.select("#selDataset").on("change", function(d) {
+ 
+
+              // recover the option that has been chosen
+              var selectedOption = d3.select(this).property("value")
+          // run the updateChart function with this selected option
+          update()
+   
+   
+      })
+  
+  })
+  
+  
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 
 
@@ -740,9 +1670,258 @@ var Tooltip = d3.select("#my_dataviz")
 
 
 
+<script>
+
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 30, bottom: 50, left: 50},
+      width = 400 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+  
+  // append the svg object to the body of the page
+  var svg5 = d3.select("#svg5")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+  
+  // Parse the Data
+  d3.csv("images/data_stacked.csv", function(data) {
+  
+    // List of subgroups = header of the csv files = soil condition here
+    var subgroups = data.columns.slice(1)
+  
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    var groups = d3.map(data, function(d){return(d.group)}).keys()
+  
+    // Add X axis
+    var x = d3.scaleBand()
+        .domain(groups)
+        .range([0, width])
+        .padding([0.2])
+    svg5.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-25)")
+      .style("text-anchor", "end");
+      
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, 12000])
+      .range([ height, 0 ]);
+    svg5.append("g")
+      .call(d3.axisLeft(y));
+  
+    // color palette = one color per subgroup
+    var color = d3.scaleOrdinal()
+      .domain(subgroups)
+      .range(['#778899','#FE5F55'])
+  
+    //stack the data? --> stack per subgroup
+    var stackedData = d3.stack()
+      .keys(subgroups)
+      (data)
+  
+  
+      svg5.append("circle").attr("cx",230).attr("cy",55).attr("r", 6).style("fill", "#778899")
+      svg5.append("text").attr("x", 240).attr("y",55).text("Confirmed Cases").style("font-size", "15px").attr("alignment-baseline","middle")
+
+      
+      svg5.append("circle").attr("cx",230).attr("cy",35).attr("r", 6).style("fill", "#FE5F55")
+      svg5.append("text").attr("x", 240).attr("y",35).text("Deaths").style("font-size", "15px").attr("alignment-baseline","middle")
+
+    // ----------------
+    // Create a tooltip
+    // ----------------
+    var tooltip = d3.select("#svg5")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltipp")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("width", "200px")
+  
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(d) {
+      var subgroupName = d3.select(this.parentNode).datum().key;
+      var subgroupValue = d.data[subgroupName];
+
+      tooltip
+          .html(subgroupName + "<br>"  + subgroupValue  + "<br>" + "Mortality Rate: " + d.data.Mortality)
+          .style("opacity", 1)
+    }
+    var mousemove = function(d) {
+      tooltip
+        .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+        .style("top", (d3.mouse(this)[1]) + "px")
+    }
+    var mouseleave = function(d) {
+      tooltip
+        .style("opacity", 50)
+    }
+  
+  
+  
+  
+    // Show the bars
+    svg5.append("g")
+      .selectAll("g")
+      // Enter in the stack data = loop key per key = group per group
+      .data(stackedData)
+      .enter().append("g")
+        .attr("fill", function(d) { return color(d.key); })
+        .selectAll("rect")
+        // enter a second time = loop subgroup per subgroup to add all rectangles
+        .data(function(d) { return d; })
+        .enter().append("rect")
+          .attr("x", function(d) { return x(d.data.group); })
+          .attr("y", function(d) { return y(d[1]); })
+          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+          .attr("width",x.bandwidth())
+          .attr("stroke", "grey")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+  
+  })
+  
+  </script>
 
 
 
+
+
+
+
+<script>
+
+  // set the dimensions and margins of the graph
+  var margin = {top: 10, right: 30, bottom: 100, left: 90},
+      width = 400 - margin.left - margin.right,
+      height = 400 - margin.top - margin.bottom;
+  
+  // append the svg object to the body of the page
+  var svg6 = d3.select("#svg6")
+    .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+  
+  // Parse the Data
+  d3.csv("images/chinacase-conditions.csv", function(data) {
+  
+    // List of subgroups = header of the csv files = soil condition here
+    var subgroups = data.columns.slice(1)
+  
+    // List of groups = species here = value of the first column called group -> I show them on the X axis
+    var groups = d3.map(data, function(d){return(d.group)}).keys()
+  
+    // Add X axis
+    var x = d3.scaleBand()
+        .domain(groups)
+        .range([0, width])
+        .padding([0.2])
+    svg6.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).tickSizeOuter(0))
+      .selectAll("text")
+      .attr("transform", "translate(-10,0)rotate(-25)")
+      .style("text-anchor", "end");
+      
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, 25000])
+      .range([ height, 0 ]);
+    svg6.append("g")
+      .call(d3.axisLeft(y));
+  
+    // color palette = one color per subgroup
+    var color = d3.scaleOrdinal()
+      .domain(subgroups)
+      .range(['#778899','#FE5F55'])
+  
+    //stack the data? --> stack per subgroup
+    var stackedData = d3.stack()
+      .keys(subgroups)
+      (data)
+  
+
+
+
+
+      svg6.append("circle").attr("cx",120).attr("cy",55).attr("r", 6).style("fill", "#778899")
+      svg6.append("text").attr("x", 130).attr("y",55).text("Confirmed Cases").style("font-size", "15px").attr("alignment-baseline","middle")
+
+      
+      svg6.append("circle").attr("cx",120).attr("cy",35).attr("r", 6).style("fill", "#FE5F55")
+      svg6.append("text").attr("x", 130).attr("y",35).text("Deaths").style("font-size", "15px").attr("alignment-baseline","middle")
+
+  
+    // Create a tooltip
+    // ----------------
+    var tooltip = d3.select("#svg6")
+      .append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltipp")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("width", "200px")
+  
+    // Three function that change the tooltip when user hover / move / leave a cell
+    var mouseover = function(d) {
+      var subgroupName = d3.select(this.parentNode).datum().key;
+      var subgroupValue = d.data[subgroupName];
+
+      tooltip
+          .html(subgroupName + "<br>"  + subgroupValue  + "<br>" + "Mortality Rate: " + d.data.Mortality)
+          .style("opacity", 1)
+    }
+    var mousemove = function(d) {
+      tooltip
+        .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+        .style("top", (d3.mouse(this)[1]) + "px")
+    }
+    var mouseleave = function(d) {
+      tooltip
+        .style("opacity", 50)
+    }
+  
+  
+  
+  
+    // Show the bars
+    svg6.append("g")
+      .selectAll("g")
+      // Enter in the stack data = loop key per key = group per group
+      .data(stackedData)
+      .enter().append("g")
+        .attr("fill", function(d) { return color(d.key); })
+        .selectAll("rect")
+        // enter a second time = loop subgroup per subgroup to add all rectangles
+        .data(function(d) { return d; })
+        .enter().append("rect")
+          .attr("x", function(d) { return x(d.data.group); })
+          .attr("y", function(d) { return y(d[1]); })
+          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+          .attr("width",x.bandwidth())
+          .attr("stroke", "grey")
+        .on("mouseover", mouseover)
+        .on("mousemove", mousemove)
+        .on("mouseleave", mouseleave)
+  
+  })
+  
+  </script>
 
 
 
@@ -762,7 +1941,7 @@ var Tooltip = d3.select("#my_dataviz")
     </div>
     <div class="bs-component">
       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar" role="progressbar" style="width: 100%; height:25%"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
     </div>
 
@@ -779,6 +1958,23 @@ var Tooltip = d3.select("#my_dataviz")
 
   </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
