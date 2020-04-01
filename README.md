@@ -29,9 +29,13 @@ o	Live price history charts
 <br>
 
 
-  ![Bacteria by filterforge.com](https://i.ibb.co/thBjq8M/trading2.jpg)
+  ![Bacteria by filterforge.com](https://i.imgur.com/3ihHdOC.png)
 
-  ![PIE Chart](https://i.ibb.co/BN7V3q0/trading1.jpg)
+  ![PIE Chart](https://i.imgur.com/P3u1vHC.png)
 
+
+  ![Bacteria by filterforge.com](https://i.imgur.com/t5eNSVI.png)
+
+  ![PIE Chart](https://i.imgur.com/34Bh89a.png)
 
 
