@@ -1,15 +1,9 @@
 
 import pandas as pd
 import numpy as np
-import pymongo
 from flask import Flask, render_template
 from flask import jsonify
-import json
 from flask import Flask, render_template, redirect
-from flask_pymongo import PyMongo
-from bson.json_util import dumps
-import bson.json_util as json_util
-import quandl
 import requests
 from bs4 import BeautifulSoup
 
@@ -25,10 +19,10 @@ covid16_table.rename(columns = {'Country,Other':'Country', 'Serious,Critical':'C
 covid16_table = covid16_table.apply(lambda x: x.replace(',',''))
 final_table = covid16_table
 
-final_table.iloc[:,2:] = final_table.iloc[:,2:].apply(pd.to_numeric, errors='coerce')
-
+#final_table.iloc[:,2:] = final_table.iloc[:,2:].apply(pd.to_numeric, errors='coerce')
+print(final_table)
 #final_table= final_table.fillna('0')
-final_table['NewCases']= final_table['NewCases'].apply(pd.to_numeric, errors='coerce')
+#final_table['NewCases']= final_table['NewCases'].apply(pd.to_numeric, errors='coerce')
 
 final_table = final_table.merge(population_latlong, on='Country')
 final_table = final_table.drop(columns='Unnamed: 0')
@@ -41,9 +35,6 @@ final_table['PopulationAffected'] = final_table['TotalCases'] / final_table['Pop
 final_table['Cases Recovered'] =  final_table['TotalRecovered'] / final_table['TotalCases'] * 100
 final_table['Cases Active'] =  final_table['ActiveCases'] / final_table['TotalCases'] * 100
 final_table['Mortality Rate'] =  final_table['TotalDeaths'] / final_table['TotalCases'] * 100
-
-
-
 
 
 
@@ -81,7 +72,7 @@ def do_lat_long():
         if e < 20:
             graphing_value.append(150)
         if e >= 20 and e < 100:  
-            graphing_value.append(250)
+            graphing_value.append(200)
         if e >= 100 and e < 200:    
             graphing_value.append(300)
         if e >= 200 and e < 400:  
@@ -91,21 +82,60 @@ def do_lat_long():
         if e >= 1000 and e < 2000:    
             graphing_value.append(600)    
         if e >= 2000 and e < 3000:    
-            graphing_value.append(800)
+            graphing_value.append(700)
         if e >= 3000 and e < 4000:    
-            graphing_value.append(950)    
+            graphing_value.append(800)    
         if e >= 4000 and e < 8000:    
-            graphing_value.append(1150)
+            graphing_value.append(900)
         if e >= 8000 and e < 22000:    
-            graphing_value.append(1300)
+            graphing_value.append(1000)
         if e >= 22000 and e < 35000:    
-            graphing_value.append(1700)    
+            graphing_value.append(1150)    
         if e >= 35000 and e < 55000:    
-            graphing_value.append(2200)    
+            graphing_value.append(1300)    
         if e >= 55000:    
-            graphing_value.append(3000)   
+            graphing_value.append(1500)   
         
-    lat_long['graphing_value'] = graphing_value
+    lat_long['Total'] = graphing_value
+
+
+
+
+
+
+    graphing_active = []
+    
+    for e in lat_long['ActiveCases']:
+    
+        if e < 20:
+            graphing_active.append(150)
+        if e >= 20 and e < 100:  
+            graphing_active.append(200)
+        if e >= 100 and e < 200:    
+            graphing_active.append(300)
+        if e >= 200 and e < 400:  
+            graphing_active.append(400)
+        if e >= 400 and e < 1000:    
+            graphing_active.append(500)
+        if e >= 1000 and e < 2000:    
+            graphing_active.append(600)    
+        if e >= 2000 and e < 3000:    
+            graphing_active.append(700)
+        if e >= 3000 and e < 4000:    
+            graphing_active.append(450)    
+        if e >= 4000 and e < 8000:    
+            graphing_active.append(600)
+        if e >= 8000 and e < 22000:    
+            graphing_active.append(700)
+        if e >= 22000 and e < 35000:    
+            graphing_active.append(800)    
+        if e >= 35000 and e < 55000:    
+            graphing_active.append(1300)    
+        if e >= 55000:    
+            graphing_active.append(1500)   
+        
+    lat_long['Active'] = graphing_active
+ 
  
     lat_long = lat_long.fillna(0.000000)
     lat_long = lat_long.replace('\W', '')
@@ -202,14 +232,15 @@ def home_page():
     final_table = pd.read_csv('static/images/covid16_table.csv')
     final_table = final_table.iloc[:,1:]
     
-
+    lengthy = len(final_table)-1
     #TotalCases
     totalcases = final_table.iloc[-1:,1:2]
     totalcases = totalcases.rename(columns={"TotalCases": "Confirmed Cases"})
     totalcases = totalcases.set_index('Confirmed Cases')
-    
+
     #NewCases
     newcases =  final_table.iloc[-1:,2:3]
+  
     newcases = newcases.rename(columns={"NewCases": "New Cases"})
     newcases = newcases.set_index('New Cases')
     #TotalDeaths
@@ -218,25 +249,33 @@ def home_page():
     totaldeaths = totaldeaths.set_index('Total Deaths')
     #NewDeaths
     newdeaths = final_table.iloc[-1:,4:5]
-    newdeaths = newdeaths.set_index('NewDeaths')
+    newdeaths = newdeaths.rename(columns={"NewDeaths": "New Deaths"})
+    newdeaths = newdeaths.set_index('New Deaths')
     #Totalrecovered
     totalrecovered= final_table.iloc[-1:,5:6]
     totalrecovered = totalrecovered.set_index('TotalRecovered')
     #Activecases
     activecases =  final_table.iloc[-1:,6:7]
     activecases = activecases.set_index('ActiveCases')
+ 
     #Pop % Affected
-    popaffected = final_table.iloc[-1:,12:13].round(4).astype(str) + '%'
+  
+    popaffected = final_table.loc[lengthy:,['PopulationAffected']].round(4).astype(str) + '%'
+ 
     popaffected = popaffected.rename(columns={"PopulationAffected": "Population Affected"})
     popaffected  = popaffected.set_index("Population Affected")
+
     #Percentage Recovered
-    pctrecovered = final_table.iloc[-1:,13:14].round(2).astype(str) + '%'
+    pctrecovered = final_table.loc[lengthy:,['Cases Recovered']].round(2).astype(str) + '%'
     pctrecovered = pctrecovered.set_index('Cases Recovered')
+
+
+
     #Percentage Active
-    pctactive = final_table.iloc[-1:,14:15].round(2).astype(str) + '%'
+    pctactive = final_table.loc[lengthy:,['Cases Active']].round(2).astype(str) + '%'
     pctactive = pctactive.set_index('Cases Active')
    #Mortality Rate %
-    mortalityrate= final_table.iloc[-1:,15:16].round(2).astype(str) + '%'
+    mortalityrate= final_table.loc[lengthy:,['Mortality Rate']].round(2).astype(str) + '%'
     mortalityrate = mortalityrate.set_index('Mortality Rate')
    
     # NEWSSSSSSSSSSSSSSSSSSSSSSSSSS
@@ -261,9 +300,7 @@ def home_page():
     dictionary1= {'articlesource': articlesource[0], 'title': articletitle[0], 'img_url':articleurl[0], 'articleimage': articleimage[0], 'articlewhen':articlewhen[0] }
     dictionary2= {'articlesource': articlesource[1], 'title': articletitle[1], 'img_url':articleurl[1], 'articleimage': articleimage[1], 'articlewhen':articlewhen[1] }    
     dictionary3= {'articlesource': articlesource[2], 'title': articletitle[2], 'img_url':articleurl[2], 'articleimage': articleimage[2], 'articlewhen':articlewhen[2] }
-    dictionary4= {'articlesource': articlesource[3], 'title': articletitle[3], 'img_url':articleurl[2], 'articleimage': articleimage[3], 'articlewhen':articlewhen[3] }
-
-
+    dictionary4= {'articlesource': articlesource[3], 'title': articletitle[3], 'img_url':articleurl[3], 'articleimage': articleimage[3], 'articlewhen':articlewhen[3] }
 
 
     mydictlisty = [dictionary1,dictionary2]

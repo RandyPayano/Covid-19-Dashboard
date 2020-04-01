@@ -1,22 +1,78 @@
+
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+  
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Coronavirus (COVID-19 Visualization by Randy Payano</title>
-  <link rel="stylesheet" href="bootstrap.min.css" media="screen">
-  <link rel="stylesheet" href="bootstrap.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <meta property="og:title" content="Global Coronavirus (COVID-19) Live Visualization">
+    <meta property="og:description" content="Global Coronavirus (COVID-19) Live Visualization">
+    <meta property="og:image" content="https://i.ibb.co/Gk51wjk/webi.jpg">
+    <meta property="og:url" content="coronaviruscovid19.herokuapp.com">
 
-  <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
-  <script src="https://d3js.org/d3.v4.js"></script>
-  <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Global Coronavirus (COVID-19) Live Visualization">
+    <title>Global Coronavirus (COVID-19) Live Visualization by Randy Payano</title>
+    <meta name="keywords" content="CoronaVirus, Covid19, Virus, Pandemic, Visualization, flu, global, d3">
+    <link rel="stylesheet" href="bootstrap.min.css" media="screen">
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+    <script src="https://unpkg.com/simple-statistics@5.0.0/dist/simple-statistics.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+  
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="icon" href="https://i.ibb.co/QYz9FCv/webi.jpg">
 
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+
+
+
+
+
+
+
+    <script>
+
+
+     var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-23019901-1']);
+      _gaq.push(['_setDomainName', "bootswatch.com"]);
+        _gaq.push(['_setAllowLinker', true]);
+      _gaq.push(['_trackPageview']);
+
+     (function() {
+       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+     })();
+
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -24,1261 +80,845 @@
 
 
 
-/* Create three equal columns that floats next to each other */
-.rslcolumn {
-  float: left;
-  width: 18.33%;
-  margin-left: 1%;
-  padding: 3px;
-  height: 1000px;
-  border-radius: 4%;
-
-}
-
-.smalltableblock {
-  float: left;
-  width: 100px;
-  padding: 3px;
-  height: 50px;
-  border-radius: 4%;
-}
-
-
-.rsrcolumn {
-  float:left;
-  width: 20.33%;
-
-  overflow-wrap: break-word;
- height: 1222px;
-
-
-
-}
-
-
-.rsrcolumnsmall1 {
-  float:left;
-  width: 100%;
-
- height: 480px;
-
- overflow-y:auto;
-
-}
-
-.rsrcolumnsmall2 {
-  float:left;
-  width: 100%;
-  padding: 3px;
-  overflow-wrap: break-word;
- height: 400px;
- border-radius: 4%;
- overflow-y:auto;
- background: black;
-
-}
-
-
-
-.rscolumnmid {
-  float: left;
-  width: 53.33%;
-  padding: 3px;
-  margin-left: 35px;
-  margin-right: 35px;
+  /* Create three equal columns that floats next to each other */
+  .rslcolumn {
+    float: left;
+    width: 18.33%;
+    margin-left: 1%;
+    padding: 3px;
+    height: 1000px;
+    border-radius: 4%;
   
-  height: 2000px;
-  border-radius: 5%;
-  overflow-wrap: break-word;
+  }
   
-
-}
-
-
-.rscolumnmidrow2 {
-  float: left;
-  width: 100%;
-  padding: 1px;
-  margin-left: 4px;
-  margin-right: 4px;
-
-  background-color:rgb(248, 6, 119);
+  .smalltableblock {
+    float: left;
+    width: 100px;
+    padding: 3px;
+    height: 50px;
+    border-radius: 4%;
+  }
   
-  border-radius: 5%;
-  overflow-wrap: break-word;
   
-
-}
-
-
-.rsrow:after {
-  content: "";
-  display: table;
-  display: inline-block;
-  clear: both;
-  border-radius: 4%;
-}
-
-
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-  width: 100%;
-  border: 1px solid #fff;
-  text-align: center;
-}
-
-
-
-.middleee {
-  width: 100%;
-  height: 200px;
-  background-color:rgb(255, 0, 0);
-}
-
-.fullc{
-  width: 100%;
-  height: 80px;
-  background-color:rgb(255, 255, 255)
-}
-
-
-.smallleft {
-  width: 10%;
-	float:left;
-  height: 100%;
-  background-color:rgb(255, 255, 255);
-  margin-left: 20px;
+  .rsrcolumn {
+    float:left;
+    width: 20.33%;
   
-  display: inline-block;
-  overflow-wrap: break-word;
- }
- 
-.smalllmid {
-	width: 10%;
-	float:left;
-  height: 100%;
-  background-color:rgb(255, 255, 255);
-  margin-left: 20px;
-  border-radius: 5%;
-  display: inline-block;
-  overflow-wrap: break-word;
- } 
- 
- .smallright{
-	width: 10%;
-	float:left;
-  height: 100%;
-  background-color:rgb(255, 255, 255);
-  margin-left: 20px;
-  border-radius: 5%;
-  display: inline-block;
-  overflow-wrap: break-word;
- 
-
- }
- 
- .smallright2{
-	width: 10%;
-	float:left;
-  height: 100%;
-  background-color:rgb(255, 255, 255);
-  margin-left: 20px;
-  border-radius: 5%;
-  display: inline-block;
-  overflow-wrap: break-word;
- }
-
- .smallright3{
-      margin-left: 55px;
-      margin-right: 20px;
-	  width: 12;
-    height: 100%;
-    background-color:rgb(255, 255, 255);
-
     overflow-wrap: break-word;
-    float: left;
-  	overflow-wrap: break-word;
- 
- }
-
-
- .smallright4{
-  margin-left: 2px;
-	  width: 12%;
-    height: 100%;
-    background-color:rgb(255, 255, 255);
+   height: 1222px;
   
-    float: left;
   
- 
- }
-
-
- .smallright5{
-    margin-left: 2px;
-	  width: 12%;
-    height: 100%;
-    background-color:rgb(255, 255, 255);
+  
+  }
+  
+  
+  .rsrcolumnsmall1 {
+    float:left;
+    width: 100%;
+  
+   height: 480px;
+  
+   overflow-y:auto;
+  
+  }
+  
+  .rsrcolumnsmall2 {
+    float:left;
+    width: 100%;
+    padding: 3px;
     overflow-wrap: break-word;
-    float: left;
+   height: 400px;
+   border-radius: 4%;
+   overflow-y:auto;
+   background: black;
   
- }
-
-
-
-
-.smallright6{
-  margin-left: 10px;
-	  width: 10%;
-    height: 100%;
-    background-color:rgb(255, 255, 255);
+  }
+  
+  
+  
+  .rscolumnmid {
+    float: left;
+    width: 53.33%;
+    padding: 3px;
+    margin-left: 35px;
+    margin-right: 35px;
+    
+    height: 2000px;
+    border-radius: 5%;
     overflow-wrap: break-word;
+    
+  
+  }
+  
+  
+  .rscolumnmidrow2 {
     float: left;
-  	overflow-wrap: break-word;
-   	
-}
-
-  .circle:hover{
-        stroke: black;
-        stroke-width: 1px;
-      }
+    width: 100%;
+    padding: 1px;
+    margin-left: 4px;
+    margin-right: 4px;
+  
+    background-color:rgb(248, 6, 119);
+    
+    border-radius: 5%;
+    overflow-wrap: break-word;
+    
+  
+  }
   
   
+  .rsrow:after {
+    content: "";
+    display: table;
+    display: inline-block;
+    clear: both;
+    border-radius: 4%;
+  }
   
-  div.tooltip {
-    position: absolute;
+  
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: 1px solid #fff;
     text-align: center;
-    max-width: 220px;
-    height: auto;
-    padding: 2px;
-    font-family: "Lato", sans-serif;
-    font-size: 10px;
-    border: 0px;
-    border-radius: 1px;
-    pointer-events: none;
+  }
+  
+  
+  
+  .middleee {
+    width: 100%;
+    height: 200px;
+    background-color:rgb(255, 0, 0);
+  }
+  
+  .fullc{
+    width: 100%;
+    height: 80px;
+    background-color:rgb(255, 255, 255)
+  }
+  
+  
+  .smallleft {
+    width: 10%;
+    float:left;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    margin-left: 20px;
+    
+    display: inline-block;
+    overflow-wrap: break-word;
+   }
+   
+  .smalllmid {
+    width: 10%;
+    float:left;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    margin-left: 20px;
+    border-radius: 5%;
+    display: inline-block;
+    overflow-wrap: break-word;
+   } 
+   
+   .smallright{
+    width: 10%;
+    float:left;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    margin-left: 20px;
+    border-radius: 5%;
+    display: inline-block;
+    overflow-wrap: break-word;
+   
+  
+   }
+   
+   .smallright2{
+    width: 10%;
+    float:left;
+    height: 100%;
+    background-color:rgb(255, 255, 255);
+    margin-left: 20px;
+    border-radius: 5%;
+    display: inline-block;
+    overflow-wrap: break-word;
+   }
+  
+   .smallright3{
+
+      margin-right: 1%;
+      width: 100%;
+      height: 85%;
+     
+      overflow-wrap: break-word;
+      float: left;
+      overflow-wrap: break-word;
+   
+   }
+  
+  
+   .smallright4{
+    margin-left: 2px;
+      width: 12%;
+      height: 100%;
+      background-color:rgb(255, 255, 255);
+    
+      float: left;
+    
+   
+   }
+  
+  
+   .smallright5{
+      margin-left: 2px;
+      width: 12%;
+      height: 100%;
+      background-color:rgb(255, 255, 255);
+      overflow-wrap: break-word;
+      float: left;
+    
+   }
+  
+  
+  
+  
+  .smallright6{
+    margin-left: 10px;
+      width: 10%;
+      height: 100%;
+      background-color:rgb(255, 255, 255);
+      overflow-wrap: break-word;
+      float: left;
+      overflow-wrap: break-word;
+       
   }
   
 
+    
+    
+    
+    div.tooltip {
 
-
-
-
-path.line {
+      text-align: center;
+      max-width: 220px;
+      height: 220px;
+      padding: 2px;
+      font-family: "Lato", sans-serif;
+      font-size: 10px;
+      border: 0px;
+      border-radius: 1px;
+      pointer-events: none;
+    }
+    
+  
+  
+  
+  
+  
+  path.line {
+    fill: none;
+    stroke:rgb(34, 113, 187);
+    stroke-width: 3px;
+  }
+  
+  .axis path,
+  .axis line {
   fill: none;
-  stroke:rgb(34, 113, 187);
-  stroke-width: 3px;
-}
-
-.axis path,
-.axis line {
-fill: none;
-stroke: slategray;
-shape-rendering: crispEdges;
-}
-
-
-
-.column11 {
-  float: left;
-  width: 40%;
-  padding: 5px;
-
+  stroke: slategray;
+  shape-rendering: crispEdges;
+  }
   
-  height: 100%;
-  overflow-wrap: break-word;
-   overflow:hidden;
-}
-.column22 {
-  float: left;
-  width: 55%;
-  padding: 5px;
-  height: 555px;
- 
-}
-/* Clearfix (clear floats) */
-.row12::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-
-
-
-
-    </style>
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+  
+  .column11 {
+    float: left;
+    width: 40%;
+    padding: 5px;
+  
     
-    .containment {
-      float: left;
-      width: 380px;
-      height: 380px;
-      padding: 5px;
-
-    }
-    
-    
-    
-    .newsbox {
-      float: left;
-      width: 100%;
-      height: 30%;
-      padding: 5px;
-     
-    }
-    
-    
-    
-    .newsheaderrow {
-      float: left;
-      width: 100%;
-      height: 25%;
-      padding: 3px;
-     
+    height: 100%;
+    overflow-wrap: break-word;
+     overflow:hidden;
+  }
+  .column22 {
+    float: left;
+    width: 55%;
+    padding: 5px;
+    height: 555px;
    
-    }
-
-    .newsheaderrowdiv1 {
-      float: left;
-      width: 55%;
-      height: 70%;
-      padding: 1px;
-      overflow-wrap: break-word;
-      overflow:hidden;
-   
-    }
-    
-    
-    .newsheaderrowdiv2 {
-      float: right;
-      width: 45%;
-      height: 100%;
-      padding: 1px;
-      overflow-wrap: break-word;
-      overflow:hidden;
-   
-
-    }
-    
-    
-    
-    .newscontent {
-      float: left;
-      width: 100%;
-      height: 80%;
-      padding: 5px;
+  }
+  /* Clearfix (clear floats) */
+  .row12::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
   
-    }
-    
-    
-    .newstitles {
-      float: left;
-      width: 70%;
-      height: 98%;
-      padding: 2px;
-     
-    }
-    
-    
-    
-    .newspic {
-      float: right;
-      width: 28%;
-      height: 100%;
-      padding: 2px;
-     
-    }
-    
-    
-    
-    .tableaudiv{
-      float: left;
-      width: 500;
-      height: 500;
-      padding: 2px;
-      overflow-wrap: break-word;
-      overflow:hidden;
-     
-    }
-    
-    
-    
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
-</head>
-
-
-
-
-
-
-    <body>
-
-     
-
-      <!-- Navbar
-      ================================================== -->
+  
+  
+  
+      </style>
     
   
-
-
-
-        <div class="progress">
-          <div class="progress-bar" role="progressbar" style="width: 100%; height:100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      
+      .containment {
+        float: left;
+        width: 380px;
+        height: 380px;
+        padding: 5px;
+  
+      }
+      
+      
+      
+      .newsbox {
+        float: left;
+        width: 100%;
+        height: 30%;
+        padding: 5px;
+       
+      }
+      
+      
+      
+      .newsheaderrow {
+        float: left;
+        width: 100%;
+        height: 25%;
+        padding: 3px;
+       
      
+      }
+  
+      .newsheaderrowdiv1 {
+        float: left;
+        width: 55%;
+        height: 70%;
+        padding: 1px;
+        overflow-wrap: break-word;
+        overflow:hidden;
+     
+      }
+      
+      
+      .newsheaderrowdiv2 {
+        float: right;
+        width: 45%;
+        height: 100%;
+        padding: 1px;
+        overflow-wrap: break-word;
+        overflow:hidden;
+     
+  
+      }
+      
+      
+      
+      .newscontent {
+        float: left;
+        width: 100%;
+        height: 80%;
+        padding: 5px;
+    
+      }
+      
+      
+      .newstitles {
+        float: left;
+        width: 70%;
+        height: 98%;
+        padding: 2px;
+       
+      }
+      
+      
+      
+      .newspic {
+        float: right;
+        width: 28%;
+        height: 100%;
+        padding: 2px;
+       
+      }
+      
+      
+      
+      .tableaudiv{
+        float: left;
+        width: 500;
+        height: 500;
+        padding: 2px;
+        overflow-wrap: break-word;
+        overflow:hidden;
+       
+      }
+      
 
+
+
+
+
+
+      
+      
+      </style>
+
+
+
+
+
+
+  </head>
+
+
+
+  <body>
+
+
+
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" style= "height:135px; overflow: auto">
+      <div class="container" style="width: 100% ; height:135px; overflow: auto">
+      
+          <div class="smallright3">
+            <center> <a class="btn btn-outline-light" href="#" role="button">   
+     
+       
+              
+               
+                {% block contentttttttttttt %}
+                <h1>{{name}}</h1>
+              {{popaffected| safe}} 
+                {% endblock %}
+              
+            </a></center>
+          
+            </div> 
+
+
+
+
+            <div class="smallright3">
+
+
+              <center> <a class="btn btn-outline-light" href="#" role="button">   
        
          
-       <center><h4>Global Coronavirus (COVID-19) Overview </h4></center> 
-
- 
-                
-
-              <div class="fullc">
-
-
-
              
+                 
+                  {% block contentt%}
+                  <h1>{{name}}</h1>
+                 {{totalcases | safe}} 
+                  {% endblock %}
+               
+              </a></center>
+            
+          
+            </div>
+            
+
+
+
+
+
+            <div class="smallright3">
+              <center> <a class="btn btn-outline-light" href="#" role="button">   
+       
+         
+             
+                 
+                  {% block contentttttttttt %}
+                  <h1>{{name}}</h1>
+                {{totaldeaths | safe}} 
+                  {% endblock %}
+                
+              </a></center>
+            
+              </div> 
+
+
+
+
+          <div class="smallright3">
+            <center> <a class="btn btn-outline-light" href="#" role="button">   
+     
+      
+               
+                {% block contenttttt %}
+                <h1>{{name}}</h1>
+              {{newcases | safe}}
+                {% endblock %}
+              
+            </a></center>
+            </div>
+                  
+       
+       
+
+
+              <div class="smallright3">
+                <center> <a class="btn btn-outline-light" href="#" role="button">   
+         
+           
+                 
+                   
+                    {% block contenttt %}
+                    <h1>{{name}}</h1>
+                {{newdeaths | safe}}
+                    {% endblock %}
+                   
+                </a></center>
+              
+                </div> 
+          
                 <div class="smallright3">
-                  <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                  <center> <a class="btn btn-outline-light" href="#" role="button">   
            
              
-                    <center>
+             
                      
-                      {% block contentttttttttttt %}
+                      {% block contentttttt %}
                       <h1>{{name}}</h1>
-                     <center> {{popaffected| safe}} </center>
+                   {{pctrecovered | safe}} 
                       {% endblock %}
-                     </center>
+                
                   </a></center>
                 
                   </div> 
+              
 
-
-
-
-                  <div class="smalllmid">
-
-     
-                    <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                  <div class="smallright3">
+                    <center> <a class="btn btn-outline-light" href="#" role="button">   
              
                
-                      <center>
+                      
                        
-                        {% block contentt%}
+                        {% block contenttttttttttttttt %}
                         <h1>{{name}}</h1>
-                       <center> {{totalcases | safe}} </center>
+                    {{pctactive | safe}}
                         {% endblock %}
-                       </center>
-                    </a></center>
-                  
-                
-                  </div>
-                  
-
-
-
-
-
-                  <div class="smallright2">
-                    <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
-             
-               
-                      <center>
-                       
-                        {% block contentttttttttt %}
-                        <h1>{{name}}</h1>
-                       <center> {{totaldeaths | safe}} </center>
-                        {% endblock %}
-                       </center>
+                   
                     </a></center>
                   
                     </div> 
-
-
-
-  
-                <div class="smallleft">
-                  <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
-           
-             
-                    <center>
-                     
-                      {% block contenttttt %}
-                      <h1>{{name}}</h1>
-                     <center> {{newcases | safe}} </center>
-                      {% endblock %}
-                     </center>
-                  </a></center>
-                  </div>
-                        
-             
-             
-
-      
-                    <div class="smallright">
-                      <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
+                
+            
+                    <div class="smallright3">
+                      <center> <a class="btn btn-outline-light" href="#" role="button">   
                
-                 
-                        <center>
-                         
-                          {% block contenttt %}
+                
+                          {% block contentttttttttttttt %}
                           <h1>{{name}}</h1>
-                         <center> {{newdeaths | safe}} </center>
+                      {{mortalityrate | safe}}
                           {% endblock %}
-                         </center>
+                       
                       </a></center>
+
+
+
+
+                      
                     
                       </div> 
-                
-                      <div class="smallright4">
-                        <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
-                 
-                   
-                          <center>
-                           
-                            {% block contentttttt %}
-                            <h1>{{name}}</h1>
-                           <center> {{pctrecovered | safe}} </center>
-                            {% endblock %}
-                           </center>
-                        </a></center>
-                      
-                        </div> 
-                    
 
-                        <div class="smallright5">
-                          <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
-                   
-                     
-                            <center>
-                             
-                              {% block contenttttttttttttttt %}
-                              <h1>{{name}}</h1>
-                             <center> {{pctactive | safe}} </center>
-                              {% endblock %}
-                             </center>
-                          </a></center>
-                        
-                          </div> 
+
+
+
+
+
+
+
+
+
                       
-                  
-                          <div class="smallright6">
-                            <center> <a class="btn btn-outline-secondary" href="https://github.com/RandyPayano/PairsTrading/blob/master/data/Pairs-Trading.ipynb" role="button">   
-                     
-                       
-                              <center>
-                               
-                                {% block contentttttttttttttt %}
-                                <h1>{{name}}</h1>
-                               <center> {{mortalityrate | safe}} </center>
-                                {% endblock %}
-                               </center>
-                            </a></center>
-                          
-                            </div> 
-                  </div>          
-             
-    
-                    
+            </div>          
+       
+
+              
+
+              
+            
+            </div>   
+          
+              </div>          
+
+        </div>
+      </div>
+
       
-                    
-                  
-                  </div>   
-                
-                    </div>          
-     
 
 
 
-      <br>
-  
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="bs-component">
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 100%; height:45%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
           </div>
+        </div></div>
 
 
 
 
-
-
-
-
-
-
- <!-- Containers
-      ================================================== -->
-  
-       
-
- 
-  <div class="rsrcolumn">
-
-    <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">  <center>
-      <h5>Total Cases</h5>
-      {% block contenta %}
-      <h1>{{name}}</h1>
-      {{sorted_totals| safe}}
-      {% endblock %}
-     </center>
     </div>
-   
-
-    <div class="rsrcolumnsmall1">
-      
-
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-     
-      <br>
-      <center>  <h6>Mortality Rate by Country (%)</h6>    </center>
 
 
+    <div class="container">
 
-
-
-
-
-
-
-
-
-
-                  <div id="svg3"></div>
-
-    
-
-
-
-
-
-
-</div>
-
-
-
-
-
-
- 
-  </div>
-
-  <div class="rscolumnmid">
-
-
-    <div>
-    
-      <div id="my_dataviz"></div>
-       <svg id="my_dataviz" width="1000" height="600"></svg>
-
-
-
-
-       <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-     
-
-
-
-
-        <div id="rscolumnmidrow2">
-
-      
-          <div class="row12">
-            <div class="column11">
-           
-         
-        
-        
-        
-        
-           
-          <div id="sample-metadata" style= "margin-left:5%"></div>
-        
-            </div>
-            <div class="column22">
-
-             <h5> Case Progression by Country</h5>
-              
-              <br> <select id="selectButton"></select>
-
-              <select id="selDataset" onchange="refresh_data(this.value)"></select>
-               
-              
-              <div id="svg4" float="left"><!-- Initialize a select button -->
-               
-
-
-                </div>
-            </div>
-          
-            </div>
+      <div class="page-header" id="banner">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-6">
+            <h1>&nbsp;</h1>
+            <p class="lead"></p> &nbsp;</p>
           </div>
-
-          <div class="progress">
-            <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-          </div>
-          
-        
-
-
-
-          <div id="rscolumnmidrow2">
-            <div id="rscolumnmidrow2">
-              <br> <center>  <h5>Hubei Province Case Study:</h5></center> <br>
-              This visualization is a case study of 44,672 confirmed COVID-19 cases of the Hubei Province in China, broken down by health conditions and varying ages of the patients. The visualization is meant to inform people of the associations between age, health conditions and the coronavirus for the specified sample in the study and is not meant to be interpreted as definitive facts for all populations. The data was extracted from China’s Infectious Disease Information System. 
-              
-         
- <br>
- <center>
- <a class="btn btn-primary btn-sm" href="http://weekly.chinacdc.cn/en/article/id/e53946e2-c6c4-41e9-9a9b-fea8db1a8f51" role="button">Learn More</a>
-            </div> 
-          </center>
-              <div class="column11">
+          <div class="col-lg-4 col-md-5 col-sm-6">
+            <div class="sponsor">
+              <br>
+              <br>
              
-           
-           
-
-                <center>
-
-<h6> By Health Conditions</h6>
-<div id="svg6" float="left"></div>
-                </center>
-
-            
-              </div>
-              <div class="column22">
-  
-                <center>
-                  <h6> By Age Groups</h6>
-                <div id="svg5" float="right"><!-- Initialize a select button -->
-                  </center>
- 
-  
-  
-                  </div>
-              </div>
-        
-              </div>
-            
             </div>
-  
-
-      
-
-
-
-
-  </div>
-      
-        
-       
-      </center>
-    
-
+          </div>
+        </div>
       </div>
 
+
+
+      <br>
+      <br>
+ <br>
+<br>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <center><h4>Global Coronavirus (COVID-19) live Overview </h4></center> 
+          <div class="bs-component">
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 100%; height: 35%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+        </div></div>
+
+
+        <!-- Headings -->
+
+
+
+     
+
+      <!-- Buttons
+      ================================================== -->
+      <div class="bs-docs-section">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-lg-12">
+             
+     
+
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <h6> Filter: </h6><select id="selectButton"></select>
+
+            <div id="div_basicResize"></div>
+            <!-- Create a div where the chart will take place -->
+            <div id="div_s"></div>
+            
+            
+            
+            <div class="col-lg-4">
+            
+        </div>
+                <div class="row">
+                  
+               
+        
+        
+                                      <div style="float: left">
+              
+                                 <h6>Mortality Rate by Country (%)</h6>   
+                                      <div id="svg3">  </div>
+              
+                                                                 </div>
+            
+                                   <div style="float: right">      
+                            <h6>Population Affected by Country (%)</h6>   
+
+                                      <div id="svg2">  </div>  
+            
+                                                                 </div>
+
+                                                                </div>           
+                                                                <br>                      
+          </div>
+
+
+
+
+
+
+
+
+
+          <div class="col-lg-4">
+
+         
+            <center>  <div class="makesmaller" style="height: 520px ; overflow: auto; width: 85%; float: right";>
+              <h5>Total Cases</h5>
+           
+                  <div class="bs-component">
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+              
       
-      <script>
- 
-    // The svg
-    var svg = d3.select("svg"),
-        width = +svg.attr("width"),
-        height = +svg.attr("height");
-    
-    // Map and projection
-    var projection = d3.geoNaturalEarth()
-        .scale(width / 1.3 / Math.PI)
-        .translate([width / 2, height / 2])
-    
+   {% block contenta %}
+   <h1>{{name}}</h1>
+   {{sorted_totals| safe}}
+   {% endblock %}
 
-
-    // Create data for circles:
- 
+           </div>   </center>
 
 
 
-    d3.json("/latandlong", function(obj){
-
-      var obj = obj
-      
-      console.log(obj);
-    // Load external data and boot
-    d3.json("https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson", function(data){
-    
-        // Draw the map
-        svg.append("g")
-            .selectAll("path")
-            .data(data.features)
-            .enter().append("path")
-                .attr("fill", "#778899")
-                .attr("d", d3.geoPath()
-                    .projection(projection)
-                )
-                .style("stroke", "#fff")
 
 
-          
+           <center> <div class="makesmaller" style="height: 450px ; overflow: auto; width: 85%; float: right";>
                
 
-// create a tooltip
 
-// create a tooltip 
-var Tooltip = d3.select("#my_dataviz")
-.append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 1)
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "2px")
-      .style("border-radius", "5px")
-      .style("padding", "5px")
+
+
+ <!--new cases line header-->
+
+            <br>
+
+            <h5>New Cases </h5>
+        
     
-  
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function(d) {
-      Tooltip.style("opacity", 1)
-    }
-
-
-    var mousemove = function(d) {
-      Tooltip.html(d.Country + "<br>" + "Total Cases: " + d.TotalCases + "<br>" + "Active Cases: "+  d.ActiveCases + "<br>" + "Total Deaths: "+  d.TotalDeaths)
-        .style("left", (d3.mouse(this)[0]+300) + "px")
-        .style("top", (d3.mouse(this)[1]+55) + "px")
-    }
-    var mouseleave = function(d) {
-      Tooltip.style("opacity", 5)
-    };
-
-
-
-
-    // Add circles:
-    svg
-      .selectAll("myCircles")
-      .data(obj)
-      .enter()
-      .append("circle")
-        .attr("cx", function(d){ return projection([d.long,d.lat])[0] })
-        .attr("cy", function(d){ return projection([d.long,d.lat])[1] })
-        .attr("r", d => d.graphing_value / 50 )
-        .attr("class", "circle")
-        .style("fill", "69b3a2")
-        .attr("stroke", "#69b3a2")
-        .attr("stroke-width", 1)
-        .attr("fill-opacity", .7)
-      .on("mouseover", mouseover)
-      .on("mousemove", mousemove)
-      .on("mouseleave", mouseleave)
-
-
-})
-})
-
-          </script>
-
-
-
-  </div>
-
-
-  <div class="rsrcolumn">
-    
-
-
-    <div class="rsrcolumnsmall1" style="background-color:rgb(255, 255, 255);">  <center>
-      <h5>New Cases </h5>
-      {% block content %}
-      <h1>{{name}}</h1>
-      {{sorted_newcases | safe}}
-      {% endblock %}
-     </center>
-    </div>
-
-                                          <div class="rsrcolumnsmall1">
-                                            
-
-
-                                            <div class="progress">
-                                              <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                              </div>
-                                              <br>
-                                            <center>  <h6>Population Affected by Country (%)</h6>    </center>
-
-
-
-
-
-
-
-
-                                            <center> <div id="svg2"></div> </center> 
-
-                                          
-                                          
-                                          </div>
-
-
-     
-  <center>  <h5>&nbsp;</h5>    </center>
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: 100%; height:25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-  </div>
-
-
-
-
-
-
-
-
-  <div class="containment">
-  
-  <center> <h5> Latest News</h5></center>
-    <div class="newsbox">
-
-
-  
-
-          <div class="newsheaderrow">
-
+                <div class="bs-component">
+                  <div class="progress">
+                    <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
             
-
-            <div class="newsheaderrowdiv1">
-            <h6>  {{ dictionary1.articlesource}}</h6>
-          </div>
-            
-           
-             <div class="newsheaderrowdiv2">
-
-            {{ dictionary1.articlewhen}}
-          </div>
-
-
-
-
-
-          </div>
-
-
-    <div class="newscontent">
-
-    <div class="newstitles">
-      
-      {{ dictionary1.title}}
-          </div>
-
-<div class="newspic">
-  <img src="{{ dictionary1.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
-          </div>
     
-
-
+            {% block content %}
+            <h1>{{name}}</h1>
+            {{sorted_newcases | safe}}
+            {% endblock %}
+          
           </div>
-  
-    </div>
+        </center>
 
 
+
+
+
+
+
+
+
+            <div class="bs-component" style="margin-bottom: 15px;">
 <br>
 
 
 
-    <div class="newsbox">
-
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
 
 
-      <div class="newsheaderrow">
-        <div class="newsheaderrowdiv1">
-        <h6>{{ dictionary2.articlesource}}</h6>
-        </div>
-          
+
+            </div>
+
+            
          
-           <div class="newsheaderrowdiv2">
 
-          {{ dictionary2.articlewhen}}
+      
         </div>
-
       </div>
 
-
-<div class="newscontent">
-
-<div class="newstitles">
-  {{ dictionary2.title}}
-
-      </div>
-
-<div class="newspic">
-  <img src="{{ dictionary2.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
-
-      </div>
-
-
-
-      </div>
-
-</div>
-
-
-<br>
-
-<div class="newsbox">
-
-
-  <div class="progress">
-    <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-    </div>
-
-
-  <div class="newsheaderrow">
-
-    <div class="newsheaderrowdiv1">
-     <h6> {{ dictionary3.articlesource}}</h6>
-    </div>
-      
-     
-       <div class="newsheaderrowdiv2">
-
-      {{ dictionary3.articlewhen}}
-    </div>
-
-  </div>
-
-
-<div class="newscontent">
-
-<div class="newstitles">
-  {{ dictionary3.title}}
-
-  </div>
-
-<div class="newspic">
-  <img src="{{ dictionary3.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
-
-  </div>
-
-
-
-  </div>
-
-</div>
-
-
-
-
-<div class="newsbox">
-
-
-  
-
-  <div class="newsheaderrow">
-
-    <div class="progress">
-      <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-  
-
-    <div class="newsheaderrowdiv1">
-    <h6>  {{ dictionary4.articlesource}}</h6>
-  </div>
-    
-   
-     <div class="newsheaderrowdiv2">
-
-    {{ dictionary4.articlewhen}}
-  </div>
-
-
-
-  </div>
-
-
-<div class="newscontent">
-
-  <br>
-
-
-<div class="newstitles">
-
-{{ dictionary4.title}}
-  </div>
-
-<div class="newspic">
-<img src="{{ dictionary4.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/>
-  </div>
-
-
-
-  </div>
-
-</div>
-
-
-<br>
-
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</div>
-    
-
-</div>
-
-</div>   
-
-</div>
-
-</div>
-
-      
-
-
-     
-            <div class="progress-bar" role="progressbar" style="width: 100%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+      <!-- Typography
+      ================================================== -->
+      <div class="bs-docs-section">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+
+            </div>
           </div>
         </div>
- <!-- Containers
-      ================================================== -->
-     
-            
-       
-      
-      </div>
-      <br>
 
 
 
-<script>
-
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 100, left: 90},
-      width = 380 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-  
-  // append the svg object to the body of the page
-  var svg2 = d3.select("#svg2")
-      .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-  
-  // Parse the Data
-  d3.csv("images/sorted_popaffectcsv.csv", function(data) {
-  
-  // X axis
-  var x = d3.scaleBand()
-    .range([ 0, width ])
-    .domain(data.map(function(d) { return d.Country; }))
-    .padding(0.2);
-  svg2.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-45)")
-      .style("text-anchor", "end");
-  
-  // Add Y axis
-  var y =d3.scaleSqrt()
-    .domain([d3.min(data, function(d) { return d.PopulationAffected; }),d3.max(data, function(d) { return d.PopulationAffected; })])
-    .range([ height, 0]);
-  svg2.append("g")
-    .call(d3.axisLeft(y));
-  
-  // Bars
-  svg2.selectAll("mybar")
-    .data(data)
-    .enter()
-    .append("rect")
-      .attr("x", function(d) { return x(d.Country); })
-      .attr("width", x.bandwidth())
-      .attr("fill", "#778899")
-      .attr("fill-opacity", .8)
-      .attr("stroke", "#69b3a2")
-      // no bar at the beginning thus:
-      .attr("height", function(d) { return height - y(0); }) // always equal to 0
-      .attr("y", function(d) { return y(0); })
-  
-  // Animation
-  svg2.selectAll("rect")
-    .transition()
-    .duration(800)
-    .attr("y", function(d) { return y(d.PopulationAffected); })
-    .attr("height", function(d) { return height - y(d.PopulationAffected); })
-    .delay(function(d,i){console.log(i) ; return(i*100)})
-  
-  })
-  
-  </script>
 
 
 
+
+
+        <div class="row">
+          <div class="col-lg-12">
+
+            <div class="bs-component">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%; height: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div></div>
+
+        
 
 
 <br>
@@ -1288,700 +928,1272 @@ var Tooltip = d3.select("#my_dataviz")
 
 
 
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="bs-component">
+              <center>
 
-<div>
+              <h5> Cumulative Case Progression</h5>
+        
 
-
-
-
-
-
-
-
-
-<script>
-
-
- 
-// set the dimensions and margins of the graph
-  // set the dimensions and margins of the graph
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 100, left: 30},
-      width = 380 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-  
-  
-  // append the svg object to the body of the page
-  var svg3 = d3.select("#svg3")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-  
-  // Parse the Data
-  d3.csv("images/sorted_mortalityratecsv.csv", function(data) {
-  
-  // X axis
-  var x = d3.scaleBand()
-    .range([ 0, width ])
-    .domain(data.map(function(d) { return d.Country; }))
-    .padding(0.2);
-  svg3.append("g")
-    .attr("transform", "translate(0," + height + ")")
-    .call(d3.axisBottom(x))
-    .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-60)")
-      .style("text-anchor", "end");
-  
-  // Add Y axis
-  var y = d3.scaleLinear()
-    .domain([0, 15])
-    .range([ height, 0]);
+             <select id="selDataset" onchange="refresh_data(this.value)"></select>
+              
     
+            </center>
 
         
-  svg3.append("g")
-    .call(d3.axisLeft(y));
-  
-
-
-
-    
-  // Bars
-  svg3.selectAll("mybarr")
-    .data(data)
-    .enter()
-    .append("rect")
-      .attr("x", function(d) { return x(d.Country); })
-      .attr("width", x.bandwidth())
-      .attr("fill", "#778899")
-      .attr("fill-opacity", .8)
-      .attr("stroke", "#69b3a2")
-      // no bar at the beginning thus:
-      .attr("height", function(d) { return height - y(0); }) // always equal to 0
-      .attr("y", function(d) { return y(0); })
-  
-  // Animation
-  svg3.selectAll("rect")
-    .transition()
-    .duration(800)
-    .attr("y", function(d) { return y(d.MortalityRate); })
-    .attr("height", function(d) { return height - y(d.MortalityRate); })
-    .delay(function(d,i){console.log(i) ; return(i*100)})
-
-  })
-
-  
-
-
-
-  </script>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- Create a div where the graph will take place -->
-
-
-<!-- Color Scale -->
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-
-
-
-
-
-<script>
-
-
-// set the dimensions and margins of the graph
-  // set the dimensions and margins of the graph
-  var margin = {top: 15, right: 30, bottom: 5, left: 30},
-      width = 480 - margin.left - margin.right,
-      height = 570  - margin.top - margin.bottom;
-  
-  
-  // append the svg object to the body of the page
-  var svg4 = d3.select("#svg4")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-  
-  //Read the data
-  d3.csv("images/AAconfirmed.csv",
-
-
-  // Now I can use this dataset:
-  function(d){
-    var changecountry = d3.select("#selectButton").property("value") 
-
-    return { time : d3.timeParse("%Y-%m-%d")(d.time), value : d.value, 
-China : d.China,
-Italy : d.Italy,
-Spain : d.Spain,
-Germany : d.Germany,
-Iran : d.Iran,
-USA : d.USA,
-France : d.France,
-['S. Korea'] : d['.S. Korea'],
-Switzerland : d.Switzerland,
-UK : d.UK,
-Netherlands : d.Netherlands,
-Austria : d.Austria,
-Belgium : d.Belgium,
-Norway : d.Norway,
-Sweden : d.Sweden,
-Denmark : d.Denmark,
-Malaysia : d.Malaysia,
-Portugal : d.Portugal,
-Japan : d.Japan,
-Canada : d.Canada,
-Australia : d.Australia,
-Czechia : d.Czechia,
-Brazil : d.Brazil,
-Israel : d.Israel,
-Ireland : d.Ireland,
-Pakistan : d.Pakistan,
-Greece : d.Greece,
-Luxembourg : d.Luxembourg,
-Qatar : d.Qatar,
-Finland : d.Finland,
-Chile : d.Chile,
-Poland : d.Poland,
-Iceland : d.Iceland,
-Singapore : d.Singapore,
-Indonesia : d.Indonesia,
-Ecuador : d.Ecuador,
-Turkey : d.Turkey,
-['Saudi Arabia'] : d['Saudi Arabia'],
-Slovenia : d.Slovenia,
-Thailand : d.Thailand,
-Romania : d.Romania,
-Bahrain : d.Bahrain,
-Egypt : d.Egypt,
-Estonia : d.Estonia,
-['Hong Kong'] : d['Hong Kong'],
-Russia : d.Russia,
-India : d.India,
-Peru : d.Peru,
-Philippines : d.Philippines,
-Iraq : d.Iraq,
-['South Africa'] : d['South Africa'],
-Lebanon : d.Lebanon,
-Mexico : d.Mexico,
-Kuwait : d.Kuwait,
-Colombia : d.Colombia,
-['San Marino'] : d['San Marino'],
-UAE : d.UAE,
-Panama : d.Panama,
-Slovakia : d.Slovakia,
-Armenia : d.Armenia,
-Taiwan : d.Taiwan,
-Serbia : d.Serbia,
-Bulgaria : d.Bulgaria,
-Argentina : d.Argentina,
-Croatia : d.Croatia,
-Latvia : d.Latvia,
-Uruguay : d.Uruguay,
-Vietnam : d.Vietnam,
-Algeria : d.Algeria,
-['Costa Rica'] : d['Costa Rica'],
-Hungary : d.Hungary,
-Jordan : d.Jordan,
-['Bosnia and Herzegovina'] : d['Bosnia and Herzegovina'],
-['Faeroe Islands'] : d['Faeroe Islands'],
-Brunei : d.Brunei,
-Morocco : d.Morocco,
-Andorra : d.Andorra,
-Cyprus : d.Cyprus,
-['Sri Lanka'] : d['Sri Lanka'],
-['Dominican Republic'] : d['Dominican Republic'],
-Albania : d.Albania,
-['North Macedonia'] : d['North Macedonia'],
-Belarus : d.Belarus,
-Moldova : d.Moldova,
-Malta : d.Malta,
-Lithuania : d.Lithuania,
-Tunisia : d.Tunisia,
-Kazakhstan : d.Kazakhstan, Cambodia : d.Cambodia, Oman : d.Oman, Palestine : d.Palestine, Guadeloupe : d.Guadeloupe, Azerbaijan : d.Azerbaijan, Georgia : d.Georgia, Venezuela : d.Venezuela, ['Burkina Faso'] : d['Burkina Faso'], ['New Zealand'] : d['New Zealand'], Senegal : d.Senegal, Martinique : d.Martinique, Ukraine : d.Ukraine, Liechtenstein : d.Liechtenstein, ['Réunion'] : d['Réunion'], Afghanistan : d.Afghanistan, Honduras : d.Honduras, Bangladesh : d.Bangladesh, Cameroon : d.Cameroon, DRC : d.DRC, Macao : d.Macao, Rwanda : d.Rwanda, Cuba : d.Cuba, Jamaica : d.Jamaica, Bolivia : d.Bolivia, Ghana : d.Ghana, Guyana : d.Guyana, ['French Guiana'] : d['French Guiana'], ['Puerto Rico'] : d['Puerto Rico'], Maldives : d.Maldives, Paraguay : d.Paraguay, Guatemala : d.Guatemala, Nigeria : d.Nigeria, ['Channel Islands'] : d['Channel Islands'], Monaco : d.Monaco,
-['French Polynesia'] : d['French Polynesia'], Gibraltar : d.Gibraltar, ['Ivory Coast'] : d['Ivory Coast'], Ethiopia : d.Ethiopia, Togo : d.Togo, ['Trinidad and Tobago'] : d['Trinidad and Tobago'], Kenya : d.Kenya,
-Mongolia : d.Mongolia, Aruba : d.Aruba, ['Saint Martin'] : d['Saint Martin'], Suriname : d.Suriname, ['Cayman Islands'] : d['Cayman Islands'], ['Curaçao'] : d['Curaçao'], Gabon : d.Gabon,
-Namibia : d.Namibia, ['St. Barth'] : d['St. Barth'], ['U.S. Virgin Islands'] : d['U.S. Virgin Islands'], Sudan : d.Sudan, Bhutan : d.Bhutan, Guinea : d.Guinea, Mauritania : d.Mauritania, ['Saint Lucia'] : d['Saint Lucia'], Nepal : d.Nepal, ['Antigua and Barbuda'] : d['Antigua and Barbuda'], ['St. Vincent Grenadines'] : d['St. Vincent Grenadines'], Eswatini : d.Eswatini, ['Total:'] : d['Total:'],
-}
-  }, 
-
-  function(data) {
-    console.log(data)
-  
-      // List of groups (here I have one group per column)
-      var allGroup = ["Select Country"]
-  
-      // add the options to the button
-      d3.select("#selectButton")
-        .selectAll('myOptions')
-         .data(allGroup)
-        .enter()
-        .append('option')
-        .text(function (d) { return d; }) // text showed in the menu
-        .attr("value", function (d) { return d; }) // corresponding value returned by the button
-  
-      // A color scale: one color for each group
-      var myColor = d3.scaleOrdinal()
-        .domain(allGroup)
-        .range(d3.schemeSet3);
-    
-      // Add X axis --> it is a date format
-      var x = d3.scaleTime()
-        .domain(d3.extent(data, function(d) { return d.time; }))
-        .range([ 0, width ]);
-      svg4.append("g")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x))
-        .selectAll("text")
-      .attr("transform", "translate(-10,15)rotate(-60)");
-  
-      //                                      Y axis
-      var y = d3.scaleSqrt()
-        .domain([0, 100])
-        .range([height, 0 ]);
-        svg4.append("g")
-        .call(d3.axisLeft(y));
-        
-      // Initialize line with group a
-      var line = svg4
-        .append('g')
-        .append("path")
-          .datum(data)
-          .attr("stroke-width", 1.5)
-          .attr("d", d3.line()
-            .x(function(d) { return x(+d.time) })
-            .y(function(d) { return y(+d.value)})
-          )
-          .attr("stroke", "#69b3a2")
-        .style("stroke-width", 3)
-        .style("fill", "none")
-      
-
-
-
-
-
-
-      // A function that update the chart
-      function update() {
-        d3.csv("images/AAconfirmed.csv",
-        function(d){
-          var changecountry = d3.select("#selectButton").property("value") 
-          return { time : d3.timeParse("%Y-%m-%d")(d.time),valueA: d.valueA ,valueB : d.valueB,valueC : d.valueC }
-        })
-
-     
-        var changecountry= d3.select("#selDataset").property("value") 
-        // Create new data with the selection?
-        var dataFilter = data.map(function(d){return  {time: d.time, value: d[changecountry]} })
-        console.log("updated")
-   
-
-
-
-
-        // Update X axis
-  
-           // Give these new data to update line
-           line
-            .datum(dataFilter)
-            .transition()
-            .duration(1000)
-            .attr("d", d3.line().x(function(d) { return x(+d.time)}).y(function(d) { return y(+d.value / 1000)}))
-            .attr("stroke", "#69b3a2")
+             <div id="svg4">  </div>
+              
             
 
 
-            y.d3.scaleSqrt().domain([0, 100])  // change scale to 0, to between 10 and 100
-            svg4.selectAll("g.y.yaxis")
-                         .text("Rescaled Axis")
-                    .transition().duration(1500).ease("sin-in-out")  // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
-                    .call(yAxis);  
-
-       
-          
-      }
-  
 
 
-
-      // When the button is changed, run the updateChart function
-      d3.select("#selDataset").on("change", function(d) {
- 
-
-              // recover the option that has been chosen
-              var selectedOption = d3.select(this).property("value")
-          // run the updateChart function with this selected option
-          update()
-   
-   
-      })
-  
-  })
-  
-  
-  </script>
+                                              
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="bs-component">
 
 
+              <center>  <div id="sample-metadata" style="float:left;">  </div></center> 
 
-
-
-
-
-
-
-
-
-
-
+             
+</div>
 </div>
 
+          <div class="col-lg-4">
+            <div class="bs-component">
+          
+
+
+
+
+             <div class="makesmaller" style="height: 400px ; overflow: auto";>
+                <center> <h5> Latest News</h5></center>
 
 
 
 
 
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <strong class="mr-auto">{{ dictionary1.articlesource}}</strong>
+                    <small> {{ dictionary1.articlewhen}}</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body">
+                  {{ dictionary1.title}} 
+                    <div class="newspic">
+                      <a href="{{ dictionary1.img_url}}">    <img src="{{ dictionary1.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/> </a>
+                    
+                    </div>
+
+                  </div>
+
+                  
+                </div>
+
+
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+         <strong class="mr-auto">{{ dictionary2.articlesource}}</strong> 
+                    <small> {{ dictionary2.articlewhen}}</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body">
+                  {{ dictionary2.title}}
+
+                    <div class="newspic">
+                      <a href="{{ dictionary1.img_url}}">   <img src="{{ dictionary2.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/> </a>
+                    
+                    </div>
+                  </div>
+                </div>
 
 
 
 
 
+                
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <strong class="mr-auto">{{ dictionary3.articlesource}}</strong>
+                    <small> {{ dictionary3.articlewhen}}</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body">
+                    {{ dictionary3.title}}
+
+                    <div class="newspic">
+                      <a href="{{ dictionary3.img_url}}">  <img src="{{ dictionary3.articleimage }}" alt="featured_img_url" style='height: 100%; width: 100%; object-fit: contain'/> </a>
+                    
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                  <div class="toast-header">
+                    <strong class="mr-auto">{{ dictionary4.articlesource}}</strong>
+                    <small> {{ dictionary4.articlewhen}}</small>
+                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body" style="float: left">
+                    {{ dictionary4.title}}
+
+                    <div class="newspic">
+                      <a href="{{ dictionary4.img_url}}">    <img src="{{ dictionary4.articleimage }}" alt="featured_img_url" style='float: right; height: 100%; width: 100%; object-fit: contain'/> </a>
+                    
+                    </div>
+
+
+                  </div>
+                </div>
+
+
+              
+                        </div>
+                
+                  </div>
+              
+              
+              <br>
+              
+              
+            </div>
+            </div> 
+            </div>
 
 
 
-<script>
+          
+    
 
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 50, left: 50},
-      width = 400 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-  
-  // append the svg object to the body of the page
-  var svg5 = d3.select("#svg5")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-  
-  // Parse the Data
-  d3.csv("images/data_stacked.csv", function(data) {
-  
-    // List of subgroups = header of the csv files = soil condition here
-    var subgroups = data.columns.slice(1)
-  
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    var groups = d3.map(data, function(d){return(d.group)}).keys()
-  
-    // Add X axis
-    var x = d3.scaleBand()
-        .domain(groups)
-        .range([0, width])
-        .padding([0.2])
-    svg5.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickSizeOuter(0))
-      .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-25)")
-      .style("text-anchor", "end");
-      
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain([0, 12000])
-      .range([ height, 0 ]);
-    svg5.append("g")
-      .call(d3.axisLeft(y));
-  
-    // color palette = one color per subgroup
-    var color = d3.scaleOrdinal()
-      .domain(subgroups)
-      .range(['#778899','#FE5F55'])
-  
-    //stack the data? --> stack per subgroup
-    var stackedData = d3.stack()
-      .keys(subgroups)
-      (data)
-  
-  
-      svg5.append("circle").attr("cx",230).attr("cy",55).attr("r", 6).style("fill", "#778899")
-      svg5.append("text").attr("x", 240).attr("y",55).text("Confirmed Cases").style("font-size", "15px").attr("alignment-baseline","middle")
 
-      
-      svg5.append("circle").attr("cx",230).attr("cy",35).attr("r", 6).style("fill", "#FE5F55")
-      svg5.append("text").attr("x", 240).attr("y",35).text("Deaths").style("font-size", "15px").attr("alignment-baseline","middle")
 
-    // ----------------
-    // Create a tooltip
-    // ----------------
-    var tooltip = d3.select("#svg5")
-      .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltipp")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "1px")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("width", "200px")
-  
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function(d) {
-      var subgroupName = d3.select(this.parentNode).datum().key;
-      var subgroupValue = d.data[subgroupName];
+        <div class="row">
+          <div class="col-lg-12">
 
-      tooltip
-          .html(subgroupName + "<br>"  + subgroupValue  + "<br>" + "Mortality Rate: " + d.data.Mortality)
-          .style("opacity", 1)
-    }
-    var mousemove = function(d) {
-      tooltip
-        .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-        .style("top", (d3.mouse(this)[1]) + "px")
-    }
-    var mouseleave = function(d) {
-      tooltip
-        .style("opacity", 50)
-    }
-  
-  
-  
-  
-    // Show the bars
-    svg5.append("g")
-      .selectAll("g")
-      // Enter in the stack data = loop key per key = group per group
-      .data(stackedData)
-      .enter().append("g")
-        .attr("fill", function(d) { return color(d.key); })
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data(function(d) { return d; })
-        .enter().append("rect")
-          .attr("x", function(d) { return x(d.data.group); })
-          .attr("y", function(d) { return y(d[1]); })
-          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-          .attr("width",x.bandwidth())
-          .attr("stroke", "grey")
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-  
-  })
-  
-  </script>
+            <div class="bs-component">
+              <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 100%; height: 35%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div></div>
+
+
+      <!-- Containers
+      ================================================== -->
+      <div class="bs-docs-section">
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="page-header">
+       
+            </div>
+            <div class="bs-component">
+              <div class="jumbotron">
+
+
+                <div class="col-lg-4" style="float: left">    <div id="svg5">  </div>        </div>
+          
+                <div class="col-lg-4" style="float: right">  <div id="svg6">  </div>        </div>
+                
+             <center>
+                <br>  <h5>Hubei Province Case Study:</h5><br>
+                This visualization is a case study of 44,672 confirmed COVID-19 cases of the Hubei Province in China, broken down by health conditions and varying ages of the patients. The visualization is meant to inform people of the associations between age, health conditions and the coronavirus for the specified sample in the study and is not meant to be interpreted as definitive facts for all populations. The data was extracted from China’s Infectious Disease Information System. 
+                
+           
+   <br> <br>   <br> <br>   <br> <br>
+
+   <a class="btn btn-primary btn-sm" href="http://weekly.chinacdc.cn/en/article/id/e53946e2-c6c4-41e9-9a9b-fea8db1a8f51" role="button">Learn More</a>
+
+
+
+
+  </center>
+             
+
+   <br>
+
+
+              </div>
+           
+           
+          </div>
+        </div>
+
+      </div>
+    </div>
 
 
 
 
 
-
-
-<script>
-
-  // set the dimensions and margins of the graph
-  var margin = {top: 10, right: 30, bottom: 100, left: 90},
-      width = 400 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
-  
-  // append the svg object to the body of the page
-  var svg6 = d3.select("#svg6")
-    .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-      .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
-  
-  // Parse the Data
-  d3.csv("images/chinacase-conditions.csv", function(data) {
-  
-    // List of subgroups = header of the csv files = soil condition here
-    var subgroups = data.columns.slice(1)
-  
-    // List of groups = species here = value of the first column called group -> I show them on the X axis
-    var groups = d3.map(data, function(d){return(d.group)}).keys()
-  
-    // Add X axis
-    var x = d3.scaleBand()
-        .domain(groups)
-        .range([0, width])
-        .padding([0.2])
-    svg6.append("g")
-      .attr("transform", "translate(0," + height + ")")
-      .call(d3.axisBottom(x).tickSizeOuter(0))
-      .selectAll("text")
-      .attr("transform", "translate(-10,0)rotate(-25)")
-      .style("text-anchor", "end");
-      
-    // Add Y axis
-    var y = d3.scaleLinear()
-      .domain([0, 25000])
-      .range([ height, 0 ]);
-    svg6.append("g")
-      .call(d3.axisLeft(y));
-  
-    // color palette = one color per subgroup
-    var color = d3.scaleOrdinal()
-      .domain(subgroups)
-      .range(['#778899','#FE5F55'])
-  
-    //stack the data? --> stack per subgroup
-    var stackedData = d3.stack()
-      .keys(subgroups)
-      (data)
-  
-
-
-
-
-      svg6.append("circle").attr("cx",120).attr("cy",55).attr("r", 6).style("fill", "#778899")
-      svg6.append("text").attr("x", 130).attr("y",55).text("Confirmed Cases").style("font-size", "15px").attr("alignment-baseline","middle")
-
-      
-      svg6.append("circle").attr("cx",120).attr("cy",35).attr("r", 6).style("fill", "#FE5F55")
-      svg6.append("text").attr("x", 130).attr("y",35).text("Deaths").style("font-size", "15px").attr("alignment-baseline","middle")
-
-  
-    // Create a tooltip
-    // ----------------
-    var tooltip = d3.select("#svg6")
-      .append("div")
-      .style("opacity", 0)
-      .attr("class", "tooltipp")
-      .style("background-color", "white")
-      .style("border", "solid")
-      .style("border-width", "1px")
-      .style("border-radius", "5px")
-      .style("padding", "10px")
-      .style("width", "200px")
-  
-    // Three function that change the tooltip when user hover / move / leave a cell
-    var mouseover = function(d) {
-      var subgroupName = d3.select(this.parentNode).datum().key;
-      var subgroupValue = d.data[subgroupName];
-
-      tooltip
-          .html(subgroupName + "<br>"  + subgroupValue  + "<br>" + "Mortality Rate: " + d.data.Mortality)
-          .style("opacity", 1)
-    }
-    var mousemove = function(d) {
-      tooltip
-        .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
-        .style("top", (d3.mouse(this)[1]) + "px")
-    }
-    var mouseleave = function(d) {
-      tooltip
-        .style("opacity", 50)
-    }
-  
-  
-  
-  
-    // Show the bars
-    svg6.append("g")
-      .selectAll("g")
-      // Enter in the stack data = loop key per key = group per group
-      .data(stackedData)
-      .enter().append("g")
-        .attr("fill", function(d) { return color(d.key); })
-        .selectAll("rect")
-        // enter a second time = loop subgroup per subgroup to add all rectangles
-        .data(function(d) { return d; })
-        .enter().append("rect")
-          .attr("x", function(d) { return x(d.data.group); })
-          .attr("y", function(d) { return y(d[1]); })
-          .attr("height", function(d) { return y(d[0]) - y(d[1]); })
-          .attr("width",x.bandwidth())
-          .attr("stroke", "grey")
-        .on("mouseover", mouseover)
-        .on("mousemove", mousemove)
-        .on("mouseleave", mouseleave)
-  
-  })
-  
-  </script>
 
 
 
       <footer id="footer">
-      
-        
+        <div class="row">
+          <div class="col-lg-12">
+
+            <br> 
+           
 
 
 
-  <center>© 2020
-    Randy Payano</center> 
+            <center>© 2020
+              <a href="https://www.linkedin.com/in/randy-payano/">Randy Payano</a> |   <a href="mailto:randypayano@gmail.com.com">Contact</a><br>
+          
+            
+            </center>
+          
+                  <center> Data Source: <a href="https://www.worldometers.info/">Worldometers</a> | <a href="https://github.com/CSSEGISandData/COVID-19 ">JHU CSSE  | </a><a href="https://www.cdc.gov/">CDC</a>    | <a href="https://www.ecdc.europa.eu/en">ECDC</a> | <a href="http://www.chinacdc.cn/en/">Chinacdc </a></center>
+          
+          </div>
         </div>
 
       </footer>
 
 
     </div>
-    <div class="bs-component">
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 100%; height:25%"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-      </div>
-    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!--SVG4 chart-->
+
+
+
+<script>
+
+
+  // set the dimensions and margins of the graph
+    // set the dimensions and margins of the graph
+    var margin = {top: 15, right: 30, bottom: 65, left: 30},
+        width4 = 400- margin.left - margin.right,
+        height4 = 374 - margin.top - margin.bottom;
+    
+    
+    // append the svg object to the body of the page
+    var svg4 = d3.select("#svg4")
+      .append("svg")
+        .attr("width", width4 + margin.left + margin.right)
+        .attr("height", height4 + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+    
+    //Read the data
+    d3.csv("images/march31confirmed.csv",
+  
+  
+    // Now I can use this dataset:
+    function(d){
+
+  
+      return { time : d3.timeParse("%Y-%m-%d")(d.time), value : d.value, 
+  China : d.China,
+  Italy : d.Italy,
+  Spain : d.Spain,
+  Germany : d.Germany,
+  Iran : d.Iran,
+  USA : d.USA,
+  France : d.France,
+  ['S. Korea'] : d['S. Korea'],
+  Switzerland : d.Switzerland,
+  UK : d.UK,
+  Netherlands : d.Netherlands,
+  Austria : d.Austria,
+  Belgium : d.Belgium,
+  Norway : d.Norway,
+  Sweden : d.Sweden,
+  Denmark : d.Denmark,
+  Malaysia : d.Malaysia,
+  Portugal : d.Portugal,
+  Japan : d.Japan,
+  Canada : d.Canada,
+  Australia : d.Australia,
+  Czechia : d.Czechia,
+  Brazil : d.Brazil,
+  Israel : d.Israel,
+  Ireland : d.Ireland,
+  Pakistan : d.Pakistan,
+  Greece : d.Greece,
+  Luxembourg : d.Luxembourg,
+  Qatar : d.Qatar,
+  Finland : d.Finland,
+  Chile : d.Chile,
+  Poland : d.Poland,
+  Iceland : d.Iceland,
+  Singapore : d.Singapore,
+  Indonesia : d.Indonesia,
+  Ecuador : d.Ecuador,
+  Turkey : d.Turkey,
+  ['Saudi Arabia'] : d['Saudi Arabia'],
+  Slovenia : d.Slovenia,
+  Thailand : d.Thailand,
+  Romania : d.Romania,
+  Bahrain : d.Bahrain,
+  Egypt : d.Egypt,
+  Estonia : d.Estonia,
+  ['Hong Kong'] : d['Hong Kong'],
+  Russia : d.Russia,
+  India : d.India,
+  Peru : d.Peru,
+  Philippines : d.Philippines,
+  Iraq : d.Iraq,
+  ['South Africa'] : d['South Africa'],
+  Lebanon : d.Lebanon,
+  Mexico : d.Mexico,
+  Kuwait : d.Kuwait,
+  Colombia : d.Colombia,
+  ['San Marino'] : d['San Marino'],
+  UAE : d.UAE,
+  Panama : d.Panama,
+  Slovakia : d.Slovakia,
+  Armenia : d.Armenia,
+  Taiwan : d.Taiwan,
+  Serbia : d.Serbia,
+  Bulgaria : d.Bulgaria,
+  Argentina : d.Argentina,
+  Croatia : d.Croatia,
+  Latvia : d.Latvia,
+  Uruguay : d.Uruguay,
+  Vietnam : d.Vietnam,
+  Algeria : d.Algeria,
+  ['Costa Rica'] : d['Costa Rica'],
+  Hungary : d.Hungary,
+  Jordan : d.Jordan,
+  ['Bosnia and Herzegovina'] : d['Bosnia and Herzegovina'],
+  ['Faeroe Islands'] : d['Faeroe Islands'],
+  Brunei : d.Brunei,
+  Morocco : d.Morocco,
+  Andorra : d.Andorra,
+  Cyprus : d.Cyprus,
+  ['Sri Lanka'] : d['Sri Lanka'],
+  ['Dominican Republic'] : d['Dominican Republic'],
+  Albania : d.Albania,
+  ['North Macedonia'] : d['North Macedonia'],
+  Belarus : d.Belarus,
+  Moldova : d.Moldova,
+  Malta : d.Malta,
+  Lithuania : d.Lithuania,
+  Tunisia : d.Tunisia,
+  Kazakhstan : d.Kazakhstan, Cambodia : d.Cambodia, Oman : d.Oman, Palestine : d.Palestine, Guadeloupe : d.Guadeloupe, Azerbaijan : d.Azerbaijan, Georgia : d.Georgia, Venezuela : d.Venezuela, ['Burkina Faso'] : d['Burkina Faso'], ['New Zealand'] : d['New Zealand'], Senegal : d.Senegal, Martinique : d.Martinique, Ukraine : d.Ukraine, Liechtenstein : d.Liechtenstein, ['Réunion'] : d['Réunion'], Afghanistan : d.Afghanistan, Honduras : d.Honduras, Bangladesh : d.Bangladesh, Cameroon : d.Cameroon, DRC : d.DRC, Macao : d.Macao, Rwanda : d.Rwanda, Cuba : d.Cuba, Jamaica : d.Jamaica, Bolivia : d.Bolivia, Ghana : d.Ghana, Guyana : d.Guyana, ['French Guiana'] : d['French Guiana'], ['Puerto Rico'] : d['Puerto Rico'], Maldives : d.Maldives, Paraguay : d.Paraguay, Guatemala : d.Guatemala, Nigeria : d.Nigeria, ['Channel Islands'] : d['Channel Islands'], Monaco : d.Monaco,
+  ['French Polynesia'] : d['French Polynesia'], Gibraltar : d.Gibraltar, ['Ivory Coast'] : d['Ivory Coast'], Ethiopia : d.Ethiopia, Togo : d.Togo, ['Trinidad and Tobago'] : d['Trinidad and Tobago'], Kenya : d.Kenya,
+  Mongolia : d.Mongolia, Aruba : d.Aruba, ['Saint Martin'] : d['Saint Martin'], Suriname : d.Suriname, ['Cayman Islands'] : d['Cayman Islands'], ['Curaçao'] : d['Curaçao'], Gabon : d.Gabon,
+  Namibia : d.Namibia, ['St. Barth'] : d['St. Barth'], ['U.S. Virgin Islands'] : d['U.S. Virgin Islands'], Sudan : d.Sudan, Bhutan : d.Bhutan, Guinea : d.Guinea, Mauritania : d.Mauritania, ['Saint Lucia'] : d['Saint Lucia'], Nepal : d.Nepal, ['Antigua and Barbuda'] : d['Antigua and Barbuda'], ['St. Vincent Grenadines'] : d['St. Vincent Grenadines'], Eswatini : d.Eswatini, ['Total:'] : d['Total:'],
+  }
+    }, 
+  
+    function(data) {
+      console.log(data)
+    
+        // List of groups (here I have one group per column)
+        var allGroup = ["Select Country"]
+    
+        // add the options to the button
+     
+        // A color scale: one color for each group
+        var myColor = d3.scaleOrdinal()
+          .domain(allGroup)
+          .range(d3.schemeSet3);
+      
+        // Add X axis --> it is a date format
+        var x = d3.scaleTime()
+          .domain(d3.extent(data, function(d) { return d.time; }))
+          .range([ 0, width4 ]);
+        svg4.append("g")
+          .attr("transform", "translate(0," + height4 + ")")
+          .call(d3.axisBottom(x))
+          .selectAll("text")
+        .attr("transform", "translate(-10,15)rotate(-60)");
+    
+        //                                      Y axis
+        var y = d3.scaleSqrt()
+          .domain([0, 300])
+          .range([height4, 0 ]);
+          svg4.append("g")
+          .call(d3.axisLeft(y));
+          
+        // Initialize line with group a
+        var line = svg4
+          .append('g')
+          .append("path")
+            .datum(data)
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+              .x(function(d) { return x(+d.time) })
+              .y(function(d) { return y(+d.value)})
+            )
+            .attr("stroke", "#000000")
+          .style("stroke-width", 3)
+          .style("fill", "none")
+          
+       
+        
+  
+
+  
+  // Y axis label:
+  svg4.append("text")
+      .attr("text-anchor", "end")
+      .attr("transform", "rotate(90)")
+      .attr("y", -margin.left+80)
+      .attr("x", -margin.top+250)
+      .text("Confirmed Cases (In thousands)")
+  
+  
+  
+        // A function that update the chart
+        function update() {
+          d3.csv("images/march31confirmed.csv",
+          function(d){
+          
+            return { time : d3.timeParse("%Y-%m-%d")(d.time),valueA: d.valueA ,valueB : d.valueB,valueC : d.valueC }
+          })
+  
+       
+          var changecountry= d3.select("#selDataset").property("value") 
+          // Create new data with the selection?
+          var dataFilter = data.map(function(d){return  {time: d.time, value: d[changecountry]} })
+          console.log("updated")
+     
+  
+  
+  
+  
+          // Update X axis
+    
+             // Give these new data to update line
+             line
+              .datum(dataFilter)
+              .transition()
+              .duration(1000)
+              .attr("d", d3.line().x(function(d) { return x(+d.time)}).y(function(d) { return y(+d.value / 1000)}))
+              .attr("stroke", "#000000")
+              
+  
+  
+              y.d3.scaleSqrt().domain([0, 100])  // change scale to 0, to between 10 and 100
+              svg4.selectAll("g.y.yaxis")
+                           .text("Rescaled Axis")
+                      .transition().duration(1500).ease("sin-in-out")  // https://github.com/mbostock/d3/wiki/Transitions#wiki-d3_ease
+                      .call(yAxis);  
+  
+         
+            
+        }
+    
+  
+  
+  
+        // When the button is changed, run the updateChart function
+        d3.select("#selDataset").on("change", function(d) {
+   
+  
+                // recover the option that has been chosen
+                var selectedOption = d3.select(this).property("value")
+            // run the updateChart function with this selected option
+            update()
+     
+     
+        })
+    
+    })
+    
+    
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 100, left: 45},
+          width = 354 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+      
+    
+    // append the svg object to the body of the page
+    var svg2 = d3.select("#svg2")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+    
+    // Parse the Data
+    d3.csv("images/sorted_popaffectcsv.csv", function(data) {
+    
+    // X axis
+    var x = d3.scaleBand()
+      .range([ 0, width ])
+      .domain(data.map(function(d) { return d.Country; }))
+      .padding(0.2);
+    svg2.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-45)")
+        .style("text-anchor", "end");
+    
+    // Add Y axis
+    var y =d3.scaleSqrt()
+      .domain([d3.min(data, function(d) { return d.PopulationAffected; }),d3.max(data, function(d) { return d.PopulationAffected; })])
+      .range([ height, 0]);
+    svg2.append("g")
+      .call(d3.axisLeft(y));
+    
+    // Bars
+    svg2.selectAll("mybar")
+      .data(data)
+      .enter()
+      .append("rect")
+        .attr("x", function(d) { return x(d.Country); })
+        .attr("width", x.bandwidth())
+        .attr("fill", "#000000")
+        .attr("fill-opacity", .8)
+        .attr("stroke", "#00FFFF")
+        // no bar at the beginning thus:
+        .attr("height", function(d) { return height - y(0); }) // always equal to 0
+        .attr("y", function(d) { return y(0); })
+    
+    // Animation
+    svg2.selectAll("rect")
+      .transition()
+      .duration(800)
+      .attr("y", function(d) { return y(d.PopulationAffected); })
+      .attr("height", function(d) { return height - y(d.PopulationAffected); })
+      .delay(function(d,i){console.log(i) ; return(i*100)})
+    
+    })
+    
+    </script>
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+<script>
+
+
+ 
+  // set the dimensions and margins of the graph
+    // set the dimensions and margins of the graph
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 10, bottom: 100, left: 30},
+        width = 354 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+    
+    
+    // append the svg object to the body of the page
+    var svg3 = d3.select("#svg3")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+    
+    // Parse the Data
+    d3.csv("images/sorted_mortalityratecsv.csv", function(data) {
+    
+    // X axis
+    var x = d3.scaleBand()
+      .range([ 0, width ])
+      .domain(data.map(function(d) { return d.Country; }))
+      .padding(0.2);
+    svg3.append("g")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x))
+      .selectAll("text")
+        .attr("transform", "translate(-10,0)rotate(-60)")
+        .style("text-anchor", "end");
+    
+    // Add Y axis
+    var y = d3.scaleLinear()
+      .domain([0, 15])
+      .range([ height, 0]);
+      
+  
+          
+    svg3.append("g")
+      .call(d3.axisLeft(y));
+    
+  
+  
+  
+      
+    // Bars
+    svg3.selectAll("mybarr")
+      .data(data)
+      .enter()
+      .append("rect")
+        .attr("x", function(d) { return x(d.Country); })
+        .attr("width", x.bandwidth())
+        .attr("fill", "#000000")
+        .attr("fill-opacity", .8)
+        .attr("stroke", "#00FFFF")
+        // no bar at the beginning thus:
+        .attr("height", function(d) { return height - y(0); }) // always equal to 0
+        .attr("y", function(d) { return y(0); })
+    
+    // Animation
+    svg3.selectAll("rect")
+      .transition()
+      .duration(800)
+      .attr("y", function(d) { return y(d.MortalityRate); })
+      .attr("height", function(d) { return height - y(d.MortalityRate); })
+      .delay(function(d,i){console.log(i) ; return(i*100)})
+  
+    })
+  
+    
+  
+  
+  
+    </script>
+  
+  
+  
+  
+  
+  
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+      // set the dimensions and margins of the graph
+      var margin = {top: 10, right: 30, bottom: 50, left: 65},
+          width = 400 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+      
+      // append the svg object to the body of the page
+      var svg5 = d3.select("#svg5")
+        .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+      
+      // Parse the Data
+      d3.csv("images/data_stacked.csv", function(data) {
+      
+        // List of subgroups = header of the csv files = soil condition here
+        var subgroups = data.columns.slice(1)
+      
+        // List of groups = species here = value of the first column called group -> I show them on the X axis
+        var groups = d3.map(data, function(d){return(d.group)}).keys()
+      
+        // Add X axis
+        var x = d3.scaleBand()
+            .domain(groups)
+            .range([0, width])
+            .padding([0.2])
+        svg5.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x).tickSizeOuter(0))
+          .selectAll("text")
+          .attr("transform", "translate(-10,0)rotate(-25)")
+          .style("text-anchor", "end");
+          
+        // Add Y axis
+        var y = d3.scaleLinear()
+          .domain([0, 12000])
+          .range([ height, 0 ]);
+        svg5.append("g")
+          .call(d3.axisLeft(y));
+      
+        // color palette = one color per subgroup
+        var color = d3.scaleOrdinal()
+          .domain(subgroups)
+          .range(['#000000','#00FFFF'])
+      
+        //stack the data? --> stack per subgroup
+        var stackedData = d3.stack()
+          .keys(subgroups)
+          (data)
+      
+    
+          svg5.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width-90)
+        .attr("y", height + margin.top + 75)
+        .text("Age Groups");
+    
+    
+    
+    
+      
+        svg5.append("text")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(90)")
+        .attr("y", -margin.left+152)
+        .attr("x", -margin.top+220)
+        .text("Confirmed Cases")
+    
+      
+          svg5.append("circle").attr("cx",10).attr("cy",25).attr("r", 6).style("fill", "#000000")
+          svg5.append("text").attr("x", 20).attr("y",25).text("Confirmed Cases").style("font-size", "15px").attr("alignment-baseline","middle")
+    
+          
+          svg5.append("circle").attr("cx",10).attr("cy",40).attr("r", 6).style("fill", "#00FFFF")
+          svg5.append("text").attr("x", 20).attr("y",40).text("Deaths").style("font-size", "15px").attr("alignment-baseline","middle")
+    
+        // ----------------
+        // Create a tooltip
+        // ----------------
+        var tooltip = d3.select("#svg5")
+          .append("div")
+          .style("opacity", 0)
+          .attr("class", "tooltipp")
+          .style("background-color", "white")
+          .style("border", "solid")
+          .style("border-width", "1px")
+          .style("border-radius", "5px")
+          .style("padding", "10px")
+          .style("width", "200px")
+      
+        // Three function that change the tooltip when user hover / move / leave a cell
+        var mouseover = function(d) {
+          var subgroupName = d3.select(this.parentNode).datum().key;
+          var subgroupValue = d.data[subgroupName];
+    
+          tooltip
+              .html(subgroupName + "<br>"  + subgroupValue  + "<br>" + "Mortality Rate: " + d.data.Mortality)
+              .style("opacity", 1)
+        }
+        var mousemove = function(d) {
+          tooltip
+            .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+            .style("top", (d3.mouse(this)[1]) + "px")
+        }
+        var mouseleave = function(d) {
+          tooltip
+            .style("opacity", 50)
+        }
+      
+      
+      
+      
+        // Show the bars
+        svg5.append("g")
+          .selectAll("g")
+          // Enter in the stack data = loop key per key = group per group
+          .data(stackedData)
+          .enter().append("g")
+            .attr("fill", function(d) { return color(d.key); })
+            .selectAll("rect")
+            // enter a second time = loop subgroup per subgroup to add all rectangles
+            .data(function(d) { return d; })
+            .enter().append("rect")
+              .attr("x", function(d) { return x(d.data.group); })
+              .attr("y", function(d) { return y(d[1]); })
+              .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+              .attr("width",x.bandwidth())
+              .attr("stroke", "grey")
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
+      
+      })
+      
+      </script>
+    
+    
+    
+    
+    
+    
+    
+    <script>
+    
+      // set the dimensions and margins of the graph
+      var margin = {top: 10, right: 30, bottom: 100, left: 90},
+          width = 400 - margin.left - margin.right,
+          height = 400 - margin.top - margin.bottom;
+      
+      // append the svg object to the body of the page
+      var svg6 = d3.select("#svg6")
+        .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+      
+      // Parse the Data
+      d3.csv("images/chinacase-conditions.csv", function(data) {
+      
+        // List of subgroups = header of the csv files = soil condition here
+        var subgroups = data.columns.slice(1)
+      
+        // List of groups = species here = value of the first column called group -> I show them on the X axis
+        var groups = d3.map(data, function(d){return(d.group)}).keys()
+      
+        // Add X axis
+        var x = d3.scaleBand()
+            .domain(groups)
+            .range([0, width])
+            .padding([0.2])
+        svg6.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x).tickSizeOuter(0))
+          .selectAll("text")
+          .attr("transform", "translate(-10,0)rotate(-25)")
+          .style("text-anchor", "end");
+          
+        // Add Y axis
+        var y = d3.scaleLinear()
+          .domain([0, 25000])
+          .range([ height, 0 ]);
+        svg6.append("g")
+          .call(d3.axisLeft(y));
+      
+        // color palette = one color per subgroup
+        var color = d3.scaleOrdinal()
+          .domain(subgroups)
+          .range(['#000000','#00FFFF'])
+      
+        //stack the data? --> stack per subgroup
+        var stackedData = d3.stack()
+          .keys(subgroups)
+          (data)
+      
+    
+          svg6.append("text")
+        .attr("text-anchor", "end")
+        .attr("x", width-90)
+        .attr("y", height + margin.top + 75)
+        .text("Previous Conditions");
+    
+    
+        svg6.append("text")
+        .attr("text-anchor", "end")
+        .attr("transform", "rotate(90)")
+        .attr("y", -margin.left+152)
+        .attr("x", -margin.top+220)
+        .text("Confirmed Cases")
+    
+    
+       
+
+
+
+                
+          svg6.append("circle").attr("cx",110).attr("cy",25).attr("r", 6).style("fill", "#000000")
+          svg6.append("text").attr("x", 120).attr("y",25).text("Confirmed Cases").style("font-size", "15px").attr("alignment-baseline","middle")
+    
+          
+          svg6.append("circle").attr("cx",110).attr("cy",40).attr("r", 6).style("fill", "#00FFFF")
+          svg6.append("text").attr("x", 120).attr("y",40).text("Deaths").style("font-size", "15px").attr("alignment-baseline","middle")
+      
+        // Create a tooltip
+        // ----------------
+        var tooltip = d3.select("#svg6")
+          .append("div")
+          .style("opacity", 0)
+          .attr("class", "tooltipp")
+          .style("background-color", "white")
+          .style("border", "solid")
+          .style("border-width", "1px")
+          .style("border-radius", "5px")
+          .style("padding", "10px")
+          .style("width", "200px")
+      
+        // Three function that change the tooltip when user hover / move / leave a cell
+        var mouseover = function(d) {
+          var subgroupName = d3.select(this.parentNode).datum().key;
+          var subgroupValue = d.data[subgroupName];
+    
+          tooltip
+              .html(subgroupName + "<br>"  + subgroupValue  + "<br>" + "Mortality Rate: " + d.data.Mortality)
+              .style("opacity", 1)
+        }
+        var mousemove = function(d) {
+          tooltip
+            .style("left", (d3.mouse(this)[0]+90) + "px") // It is important to put the +90: other wise the tooltip is exactly where the point is an it creates a weird effect
+            .style("top", (d3.mouse(this)[1]) + "px")
+        }
+        var mouseleave = function(d) {
+          tooltip
+            .style("opacity", 50)
+        }
+      
+      
+      
+      
+        // Show the bars
+        svg6.append("g")
+          .selectAll("g")
+          // Enter in the stack data = loop key per key = group per group
+          .data(stackedData)
+          .enter().append("g")
+            .attr("fill", function(d) { return color(d.key); })
+            .selectAll("rect")
+            // enter a second time = loop subgroup per subgroup to add all rectangles
+            .data(function(d) { return d; })
+            .enter().append("rect")
+              .attr("x", function(d) { return x(d.data.group); })
+              .attr("y", function(d) { return y(d[1]); })
+              .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+              .attr("width",x.bandwidth())
+              .attr("stroke", "grey")
+            .on("mouseover", mouseover)
+            .on("mousemove", mousemove)
+            .on("mouseleave", mouseleave)
+      
+      })
+      
+      </script>
+    
+
+
+
+
+
+
+
+
+      <div id="chartgoeshere">   </div>
+
+
+
+
+
+   
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Create a div where the chart will take place -->
+
+
+<script>
+
+
+
+// A function that finishes to draw the chart for a specific device size.
+function drawChart() {
+
+  // get the current width of the div where the chart appear, and attribute it to Svg
+  currentWidth = parseInt(d3.select('#div_basicResize').style('width'), 10)
+
+
+  }
+
+
+  d3.queue()
+  .defer(d3.json, "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson")  // World shape
+  .defer(d3.json, "/latandlong") // Position of circles
+  .await(ready);
+  // The svg
+  function ready(error, data, obj) {
+console.log(currentWidth)
+var margin = {top: 200, right: 11, bottom: 100, left: 11},
+      width = currentWidth- margin.left - margin.right,
+      height = currentWidth - 150 - margin.top - margin.bottom;
+  
+// The svg
+var svg = d3.select("#div_s")
+    .append("svg")
+    .attr("width", 900 - margin.left - margin.right  )
+    .attr("height", 600 - margin.bottom)
+    .append("g")
+    .attr("transform", "translate(0,150)")
+
+
+  
+// Map and projection
+var projection = d3.geoNaturalEarth()
+.scale(currentWidth / 1.3 / Math.PI)
+.translate([currentWidth / 2, height / 2])
+
+  // Draw the map
+  svg.append("g")
+      .selectAll("path")
+      .data(data.features)
+      .enter().append("path")
+          .attr("fill", "#778899")
+          .attr("d", d3.geoPath()
+              .projection(projection)
+          )
+          .style("stroke", "#ffffff")
+
+  
+    
+    
+// create a tooltip 
+var Tooltip = d3.select("#div_basicResize")
+.append("div")
+      .style("opacity", 0)
+      .attr("class", "tooltip")
+      .style("background-color", "white")
+      .style("border", "solid")
+      .style("border-width", "1px")
+      .style("border-radius", "5px")
+      .style("padding", "10px")
+      .style("width", "auto")
+      .style("height", "auto")
+// Three function that change the tooltip when user hover / move / leave a cell
+var mouseover = function(d) {
+Tooltip.style("opacity", 1)
+}
+
+
+var mousemove = function(d) {
+Tooltip.html(d.Country + "<br>" + "Total Cases: " + d.TotalCases + "<br>" + "Active Cases: "+  d.ActiveCases + "<br>" + "Total Deaths: "+  d.TotalDeaths)
+  .style("left", (d3.mouse(this)[0]+20) + "px")
+  .style("top", (d3.mouse(this)[1]+75) + "px")
+}
+var mouseleave = function(d) {
+Tooltip.style("opacity", 5)
+};
+
+
+
+
+// Add circles:
+svg
+.selectAll("myCircles")
+.data(obj)
+.enter()
+.append("circle")
+  .attr("cx", function(d){ return projection([d.long,d.lat])[0] })
+  .attr("cy", function(d){ return projection([d.long,d.lat])[1] })
+  .attr("r", d => d.Total / 50 )
+  .attr("class", "circlee")
+  .style("fill", "#00FFFF")
+  .attr("stroke", "#000000")
+  .attr("stroke-width", 1)
+  .attr("fill-opacity", .4)
+.on("mouseover", mouseover)
+.on("mousemove", mousemove)
+.on("mouseleave", mouseleave)
+
+
+
+
+
+
+
+  // List of groups (here I have one group per column)
+  var allGroup = ["Total", "Active"]
+
+// add the options to the button
+d3.select("#selectButton")
+  .selectAll('myOptions')
+   .data(allGroup)
+  .enter()
+  .append('option')
+  .text(function (d) { return d; }) // text showed in the menu
+  .attr("value", function (d) { return d; }) // corresponding value returned by the button
+
+
+
+ // A function that update the chart
+ function update(selectedGroup) {
+
+
+// Give these new data to update line
+// Add circles:
+svg
+.selectAll("circle")
+  .attr("cx", function(d){ return projection([d.long,d.lat])[0] })
+  .attr("cy", function(d){ return projection([d.long,d.lat])[1] })
+  .attr("r", d => d[selectedGroup] / 50 )
+  .attr("class", "circlee")
+  .style("fill", "#00FFFF")
+  .attr("stroke", "#000000")
+  .attr("stroke-width", 1)
+  .attr("fill-opacity", .4)
+.on("mouseover", mouseover)
+.on("mousemove", mousemove)
+.on("mouseleave", mouseleave)
+
+
+}
+
+
+
+// When the button is changed, run the updateChart function
+d3.select("#selectButton").on("change", function(d) {
+  // recover the option that has been chosen
+  var selectedOption = d3.select(this).property("value")
+  // run the updateChart function with this selected option
+  update(selectedOption)
+})
+
+
+}
+
+
+
+
+// Initialize the chart
+drawChart()
+
+// Add an event listener that run the function when dimension change
+window.addEventListener('resize', drawChart );
+
+
+</script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
     <script src="../_vendor/jquery/dist/jquery.min.js"></script>
     <script src="../_vendor/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../_vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="../_assets/js/custom.js"></script>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+
+    <script src="../_assets/js/js/app.js') }}"></script>
+
+
+
+
+    
+    <script src="../_vendor/jquery/dist/jquery.min.js"></script>
+    <script src="../_vendor/popper.js/dist/umd/popper.min.js"></script>
+ 
     <script src="../_assets/js/custom.js"></script>
     
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-
   </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

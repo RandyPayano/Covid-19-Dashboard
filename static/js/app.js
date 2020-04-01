@@ -67,6 +67,7 @@ function create_metadata(sample) {
  
   
 
+      
       var new_pp = metaSample.append("p").style("text-anchor", "left");
       new_pp.html("<br>") 
 
