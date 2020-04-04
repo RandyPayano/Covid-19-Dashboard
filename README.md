@@ -1,10 +1,10 @@
 
-<b>Pairs Trading</b> | https://pairstrading.herokuapp.com 
+<b>Pairs Trading</b> | https://coronaviruscovid19.herokuapp.com/
 <br>
 
-<b>WHAT IS PAIRS TRADING?</b>
+<b>GLOBAL CORONAVIRUS (COVID-19) LIVE OVERVIEW</b>
 
-Created visually interactive dashboard of the spread of Coronavirus (COVID-19 ) to facilitate information and bring awareness of the global pandemic. Using quantitative methods and statistical analysis, I extracted, interpreted and analyzed data to identify key metrics and transform raw data into meaningful information. 
+I created a visually interactive dashboard of the spread of Coronavirus (COVID-19 ) to facilitate information and bring awareness of the global pandemic. Using quantitative methods and statistical analysis, I extracted, interpreted and analyzed data to identify key metrics and transform raw data into meaningful information. 
 
 
 <br>
